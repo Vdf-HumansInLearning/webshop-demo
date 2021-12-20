@@ -1,0 +1,20 @@
+[
+  {
+    "id": "2216b610-5e6e-11ec-ae1b-5323617a1277",
+    "user-id": 1,
+    "name": "Leanne Graham",
+    "email": "Sincere@april.biz",
+    "address": {
+      "street": "Kulas Light",
+      "suite": "Apt. 556",
+      "city": "Gwenborough",
+      "zipcode": "92998-3874"
+    },
+    "phone": "1-770-736-8031 x56442",
+    "order": [
+      { "name": "Samsung Galaxy a52s 5G", "price": "1849", "quantity": 1 }
+    ],
+    "payment": "card",
+    "date": "2021-12-16"
+  }
+]
