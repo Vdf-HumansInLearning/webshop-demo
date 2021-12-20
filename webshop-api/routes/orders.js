@@ -24,7 +24,7 @@ router.get('/:id', function (req, res, next) {
 
 router.get('/user/:id', function (req, res, next) {
   let orders = JSON.parse(fs.readFileSync('./data/orders.json', 'utf8'));
-  let userOrders = orders.filter(order => order['user-id'] == req.params.id);
+  let userOrders = orders.filter(order => order['user_id'] == req.params.id);
   res.status(200).json(userOrders);
 });
 
@@ -38,7 +38,7 @@ router.post('/', function (req, res, next) {
   if (user && req.body.data) {
     let order = {
       "id": uuid.v1(),
-      "user-id": user.id,
+      "user_id": user.id,
       "name": user.name,
       "email": user.email,
       "address": {
@@ -73,12 +73,13 @@ router.delete('/:id', function (req, res) {
   let order = orders.find(order => order.id == req.params.id);
   if (order) {
     let updatedOrders = orders.filter(order => order.id != req.params.id);
-    try {
-      fs.writeFileSync('./data/orders.json', JSON.stringify(updatedOrders));
-      res.status(200).send({ message: `Deleting order ${req.params.id}` });
-    } catch (err) {
-      throw err;
-    }
+    fs.writeFile('./data/orders.json', JSON.stringify(updatedOrders), function (err) {
+      if (err) {
+        throw err;
+      } else {
+        res.status(200).send({ message: `Deleting order ${req.params.id}` });
+      }
+    });
   }
 
 });

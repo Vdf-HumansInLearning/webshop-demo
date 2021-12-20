@@ -1,7 +1,7 @@
 const { response } = require('express');
-var express = require('express');
+let express = require('express');
 const fs = require('fs');
-var router = express.Router();
+let router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -29,12 +29,13 @@ router.delete('/:id', function(req, res) {
   let user = users.find(user => user.id == req.params.id)
   if(user){
     let updatedUsers = users.filter(user => user.id != req.params.id);
-    try {
-      fs.writeFileSync('./data/users.json', JSON.stringify(updatedUsers));
-      res.status(200).send({ message: `Deleting user ${req.params.id}` });
-    } catch (err) {
-      throw err;
-    }
+    fs.writeFile('./data/users.json', JSON.stringify(updatedUsers), function (err) { 
+      if (err) {
+        throw err;
+      } else {
+        res.status(200).send({ message: `Deleting user ${req.params.id}` });
+      }
+    });
   }
 
 });
@@ -80,7 +81,7 @@ router.put('/:id', function(req, res, next) {
         } else {
           res.send({ message: "Successfully updated" });
         }
-      })
+      });
     } else {
       res.status(400).send({ message: "Bad request" });
     }
@@ -96,16 +97,11 @@ function validateUser(user) {
   let regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
   let regexPassword = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
   let regexUsername = /^[a-z0-9_-]{3,16}$/igm;
-  let isValid = false;
-  if (
-    user.name.match(regexLetters) &&
+  
+  return user.name.match(regexLetters) &&
     user.name.match(regexUsername) &&
     user.email.match(regexEmail) &&
-    user.password.match(regexPassword)
-  )
-    isValid = true;
-  else isValid = false;
-  return isValid;
+    user.password.match(regexPassword);
 }
 
 module.exports = router;

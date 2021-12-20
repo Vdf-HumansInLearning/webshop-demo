@@ -103,12 +103,13 @@ router.delete('/:id', function (req, res) {
   console.log(phone);
   if (phone) {
     let updatedPhones = phones.filter(phone => phone.id != req.params.id);
-    try {
-      fs.writeFileSync('./data/phones.json', JSON.stringify(updatedPhones));
-      res.status(200).send({ message: `Deleting phone ${req.params.id}` });
-    } catch (err) {
-      throw err;
-    }
+    fs.writeFile('./data/phones.json', JSON.stringify(updatedPhones), function (err) {
+      if (err) {
+        throw err;
+      } else {
+        res.status(200).send({ message: `Deleting phone ${req.params.id}` });
+      }
+    });
   }
 
 });
@@ -156,9 +157,7 @@ router.put("/:id", function (req, res, next) {
 function validateProduct(product) {
   let regexProductName = /(^[A-Za-z0-9]{1,16})([ ]{0,1})([A-Za-z0-9]{1,16})?([ ]{0,1})?([A-Za-z0-9]{1,16})/
   let regexLetters = /^[a-zA-Z]+$/;
-  let isValid = false;
-  if (
-    product.name.match(regexProductName) &&
+  return product.name.match(regexProductName) &&
     product.name.length >= 1 &&
     product.name.length <= 30 &&
     product.brand.match(regexLetters) &&
@@ -170,11 +169,7 @@ function validateProduct(product) {
     product.quantity >= 0 &&
     product.rating >= -1 &&
     product.rating <= 5 &&
-    product.availability_date.length > 0
-  )
-    isValid = true;
-  else isValid = false;
-  return isValid;
+    product.availability_date.length > 0;
 }
 
 //FUNCTIONS
