@@ -12,7 +12,11 @@
     },
     "phone": "1-770-736-8031 x56442",
     "order": [
-      { "name": "Samsung Galaxy a52s 5G", "price": "1849", "quantity": 1 }
+      {
+        "name": "Samsung Galaxy a52s 5G",
+        "price": "1849",
+        "quantity": 1
+      }
     ],
     "payment": "card",
     "date": "2021-12-16"
