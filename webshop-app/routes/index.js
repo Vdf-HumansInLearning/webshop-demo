@@ -4,13 +4,13 @@ const axios = require('axios').default;
 
 router.get('/', function(req, res, next) {
   let admin = false;
-  let logged_in = false;
+  let loggedIn = false;
   let username = "";
   if(req.cookies.user_role === "admin"){
     admin = true;
   }
   if(req.cookies.user_role && req.cookies.user_id){
-    logged_in = true;
+    loggedIn = true;
     
     axios.get(`http://localhost:3001/users/${req.cookies.user_id}`)
     .then(function (response) {
@@ -23,7 +23,7 @@ router.get('/', function(req, res, next) {
         css: 'stylesheets/home-style.css',
         navHtml: '',
         admin : admin,
-        logged_in : logged_in,
+        logged_in : loggedIn,
         username : username
       });
     })
@@ -37,7 +37,7 @@ router.get('/', function(req, res, next) {
       css: 'stylesheets/home-style.css',
       navHtml: '',
       admin : admin,
-      logged_in : logged_in,
+      logged_in : loggedIn,
       username : username
     });
   }

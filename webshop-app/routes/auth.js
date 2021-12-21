@@ -1,16 +1,16 @@
-var express = require('express');
+const express = require('express');
 const axios = require('axios').default;
-var router = express.Router();
+const router = express.Router();
 
 router.get('/login', function(req, res, next) {
-  let logged_in = false;
+  let loggedIn = false;
   if(req.cookies.user_role && req.cookies.user_id){
-    logged_in = true;
+    loggedIn = true;
   }
   res.render('login', { 
     title: 'Login',
     css: 'stylesheets/login-style.css',
-    logged_in : logged_in
+    logged_in : loggedIn
   });
 });
 

@@ -1,16 +1,16 @@
-var express = require('express');
+const express = require('express');
 const axios = require('axios').default;
-var router = express.Router();
+const router = express.Router();
 
 router.get('/', function(req, res, next) {
   let admin = false;
-  let logged_in = false;
+  let loggedIn = false;
   let user = [];
   if(req.cookies.user_role === "admin"){
     admin = true;
   }
   if(req.cookies.user_role && req.cookies.user_id){
-    logged_in = true;
+    loggedIn = true;
     
     axios.get(`http://localhost:3001/users/${req.cookies.user_id}`)
     .then(function (response) {
@@ -22,7 +22,7 @@ router.get('/', function(req, res, next) {
         title: 'Profile',
         css: 'stylesheets/profile-style.css',
         navHtml: '',
-        logged_in : logged_in,
+        logged_in : loggedIn,
         user : user,
         admin : admin
       });
@@ -36,7 +36,7 @@ router.get('/', function(req, res, next) {
       title: 'Profile',
       css: 'stylesheets/profile-style.css',
       navHtml: '',
-      logged_in : logged_in,
+      logged_in : loggedIn,
       user : user,
       admin : admin
     });

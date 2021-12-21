@@ -143,7 +143,7 @@ router.put("/:id", function (req, res, next) {
         } else {
           res.status(201).send({ message: `Updating phone ${req.body.name}` });
         }
-      })
+      });
     } else {
       res.status(400).send({ message: "Bad request" });
     }
