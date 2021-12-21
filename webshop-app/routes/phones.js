@@ -5,12 +5,12 @@ const router = express.Router();
 /* GET Phones home page. */
 router.get('/', function (req, res, next) {
   let admin = false;
-  let logged_in = false;
+  let loggedIn = false;
   if (req.cookies.user_role === "admin") {
     admin = true;
   }
   if (req.cookies.user_role && req.cookies.user_id) {
-    logged_in = true;
+    loggedIn = true;
   }
   axios.get(`${process.env.API_HOST}:${process.env.API_PORT}/phones`, { params: req.query })
     .then(function (response) {
@@ -22,7 +22,7 @@ router.get('/', function (req, res, next) {
         filters: response.data.filters,
         selectedFilters: response.data.selectedFilters,
         admin: admin,
-        logged_in: logged_in
+        logged_in: loggedIn
       });
     })
     .catch(function (error) {

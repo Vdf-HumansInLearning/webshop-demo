@@ -1,7 +1,6 @@
-var express = require('express');
-const fs = require('fs');
+const express = require('express');
 const axios = require('axios').default;
-var router = express.Router();
+const router = express.Router();
 
 router.get('/', function (req, res, next) {
   let admin = false;

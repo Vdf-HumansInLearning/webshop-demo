@@ -1,7 +1,7 @@
 const { response } = require('express');
-var express = require('express');
+const express = require('express');
 const axios = require('axios').default;
-var router = express.Router();
+const router = express.Router();
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
