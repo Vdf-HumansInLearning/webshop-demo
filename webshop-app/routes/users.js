@@ -32,18 +32,6 @@ router.get('/', function (req, res, next) {
 
 });
 
-router.get('/register', function(req, res, next) {
-  let registered = false;
-  if(req.cookies.user_role && req.cookies.user_id){
-    registered = true;
-  }
-  res.render('register', { 
-    title: 'Register',
-    css: 'stylesheets/register-style.css',
-    registered : registered
-  });
-});
-
 router.put('/:id', function(req, res, next) {
   console.log(req.body);
   axios.put(`http://localhost:3001/users/${req.params.id}`, {
