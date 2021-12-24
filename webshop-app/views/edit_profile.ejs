@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/_head'); %>
+<body>
+    <%- include('./partials/_nav'); %>
+    <div class="container d-flex justify-content-center flex-column align-items-center mt-5 pt-5" id="container">
+        <% if(logged_in === false){ %>
+            <h3 class="main-title">You are not logged in.</h3>
+            <a href="/auth/login">Go to Login page</a>
+        <% } else{ %>  
+            <div class="invalid bg-danger mt-3 d-none" id="invalid-edit">
+                <p class="text-white p-2 m-0">An error occurred!</p>
+            </div>
+            <div id="edit-user-container" class ="edit-user d-flex justify-content-center flex-column align-items-center text-left">
+                <form class="edit-user-form" id="edit-user-form" action="/users/<%= user.id %>">
+                    <h3 class="text-center mb-3">Edit profile</h3>
+                    <h5 class="mb-1">Address</h5>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" for="edit-street" id="basic-addon1">Street*</span>
+                        <input value="<%= user.address.street %>" id="edit-street" name="street" type="text" class="form-control" placeholder="ex. : Kulas Light" aria-label="ex. : Kulas Light" aria-describedby="basic-addon1" required>
+                    </div>
+                    <div class="invalid-feedback mb-2" id="invalid-street-edit">
+                        Invalid street name.
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" for="edit-suite" id="basic-addon1">Suite*</span>
+                        <input value="<%= user.address.suite %>" id="edit-suite" name="suite" type="text" class="form-control" placeholder="ex. : Apt. 556" aria-label="ex. : Apt. 556" aria-describedby="basic-addon1" required>
+                    </div>
+                    <div class="invalid-feedback mb-2" id="invalid-suite-edit">
+                        Invalid suite format.
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" for="edit-city" id="basic-addon1">City*</span>
+                        <input value="<%= user.address.city %>" id="edit-city" name="city" type="text" class="form-control" placeholder="ex. : Gwenborough" aria-label="ex. : Gwenborough" aria-describedby="basic-addon1" required>
+                    </div>
+                    <div class="invalid-feedback mb-2" id="invalid-city-edit">
+                        Invalid city name.
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" for="edit-zip" id="basic-addon1">Zip code*</span>
+                        <input value="<%= user.address.zipcode %>" id="edit-zip" name="zip" type="text" class="form-control" placeholder="ex. : 929987" aria-label="ex. : 929987" aria-describedby="basic-addon1" required>
+                    </div>
+                    <div class="invalid-feedback mb-2" id="invalid-zip-edit">
+                        Invalid zip code format.
+                    </div>
+                    <h5 class="mb-1">Phone</h5>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" for="edit-phone" id="basic-addon1">Phone number*</span>
+                        <input value="<%= user.phone %>" id="edit-phone" name="phone" type="text" class="form-control" placeholder="ex. : 0712345678" aria-label="ex. : 0712345678" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="invalid-feedback mb-2" id="invalid-phone-edit">
+                        Invalid phone number format.
+                    </div>
+                    
+                    <div class="edit-user-buttons d-flex justify-content-between">
+                        <button type="submit" id="edit-user" class="btn btn-danger text-center">Save changes</button>
+                        <a href="/profile"><button type="button" id="cancel-edit" class="btn btn-dark text-center">Cancel</button></a>
+                    </div>
+                    
+                </form>
+            </div>
+            
+            <div class="modal" id="user-updated" role="dialog">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Successfully updated!</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        <% } %>
+
+    </div>
+
+    <%- include('./partials/_scripts'); %>
+    <script src="javascripts/profile.js"></script>
+</body>
+</html>

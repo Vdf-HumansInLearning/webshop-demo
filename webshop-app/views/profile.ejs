@@ -12,8 +12,18 @@
             <ul class="profile text-left">
                 <li>Name : <%= user.name %></li>
                 <li>Email : <%= user.email %></li>
-                <li>Address: <%= user.address.street %> street, <%= user.address.suite %>, <%= user.address.zipcode %>, <%= user.address.city %></li>
+                <% if(user.address.street){ %>
+                    <li>Address: <%= user.address.street %> street, <%= user.address.suite %>, <%= user.address.zipcode %>, <%= user.address.city %></li>
+                <% } else{ %> 
+                    <li>Address: You don't have a saved address yet.</li>
+                <% } %>
+                <% if(user.phone){ %>
+                    <li>Phone number: <%= user.phone %></li>
+                <% } else{ %> 
+                    <li>Phone number: You don't have a saved phone number yet.</li>
+                <% } %>
             </ul>
+            <a href="/profile/edit"><button class="btn btn-outline-danger">Edit profile</button></a>
         <% } %>
     </div>
 
