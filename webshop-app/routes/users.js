@@ -32,6 +32,29 @@ router.get('/', function (req, res, next) {
 
 });
 
+router.put('/:id', function(req, res, next) {
+  console.log(req.body);
+  axios.put(`http://localhost:3001/users/${req.params.id}`, {
+    street : req.body.street,
+    suite : req.body.suite,
+    city : req.body.city,
+    zipcode : req.body.zipcode,
+    phone : req.body.phone,
+  },{
+  "headers": {
+    "content-type": "application/json",
+  }})
+  .then(function (response) {
+    // handle success
+    res.send("Successfully registered");
+  })
+  .catch(function (error) {
+    // handle error
+    res.status(400).send({ message: "Bad request" });
+  });
+  
+});
+
 router.delete('/:id', function (req, res) {
   res.send(`Deleting user ${req.params.id}`);
   axios.delete(`http://localhost:3001/users/${req.params.id}`, { data: req.params.id })

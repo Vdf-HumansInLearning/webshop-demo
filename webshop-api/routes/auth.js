@@ -22,24 +22,13 @@ router.post('/register', function (req, res, next) {
       "email": req.body.email,
       "password": req.body.password,
       "role": "user",
-      "loggedin": false,
       "address": {
         "street": "",
         "suite": "",
         "city": "",
-        "zipcode": "",
-        "geo": {
-          "lat": "",
-          "lng": ""
-        }
+        "zipcode": ""
       },
-      "phone": "",
-      "website": "",
-      "company": {
-        "name": "",
-        "catchPhrase": "",
-        "bs": ""
-      }
+      "phone": ""
     };
     if (validateUser(user)) {
       let verifyUser = users.find((item) => item.username == user.username || item.email == user.email);

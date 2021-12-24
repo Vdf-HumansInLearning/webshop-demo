@@ -52,10 +52,11 @@ router.put("/:id", function (req, res, next) {
   let user = users.find((user) => user.id == req.params.id);
 
   if (user) {
-    user.name = req.body.name;
-    user.username = req.body.username;
-    user.email = req.body.email;
-    user.password = req.body.password; // remove if not used
+    user.address.street = req.body.street;
+    user.address.suite = req.body.suite;
+    user.address.city = req.body.city;
+    user.address.zipcode = req.body.zipcode;
+    user.phone = req.body.phone;
 
     if (validateUser(user)) {
       fs.writeFile("./data/users.json", JSON.stringify(users), function (err) {
@@ -75,19 +76,21 @@ router.put("/:id", function (req, res, next) {
 
 function validateUser(user) {
   let regexLetters = /(^[A-Za-z]{2,30})([ ]{0,1})([A-Za-z]{2,30})/;
-  let regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
-  let regexPassword = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
-  let regexUsername = /^[a-z0-9_-]{3,16}$/gim;
+  let regexPhone = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/g;
+  let regexZipCode = /^[0-9]{6}$/;
+  let regexAddressSuite = /^[.0-9a-zA-Z\s,-]+$/;
 
   return (
-    user.name &&
-    user.username &&
-    user.email &&
-    user.password &&
-    user.name.match(regexLetters) &&
-    user.username.match(regexUsername) &&
-    user.email.match(regexEmail) &&
-    user.password.match(regexPassword)
+    user.address.street &&
+    user.address.suite &&
+    user.address.city &&
+    user.address.zipcode &&
+    user.phone &&
+    user.address.street.match(regexLetters) &&
+    user.address.city.match(regexLetters) &&
+    user.address.suite.match(regexAddressSuite) &&
+    user.address.zipcode.match(regexZipCode) &&
+    user.phone.match(regexPhone)
   );
 }
 
