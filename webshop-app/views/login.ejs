@@ -4,7 +4,7 @@
 <body>
     <%- include('./partials/_nav_logo'); %>
     <div class="container d-flex justify-content-center flex-column align-items-center mt-5 pt-5" id="container">
-        <% if(logged_in === false){ %>
+        <% if(!logged_in){ %>
         <h1 class="main-title">Login to your account</h1>
         <div class="invalid bg-danger mt-3 d-none" id="invalid">
             <p class="text-white p-2 m-0">The username or the password is incorrect! Please try again.</p>

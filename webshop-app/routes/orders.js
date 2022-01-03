@@ -3,22 +3,15 @@ const axios = require('axios').default;
 const router = express.Router();
 
 router.get('/', function (req, res, next) {
-  let admin = false;
-  let loggedIn = false;
-  if (req.cookies.user_role === "admin") {
-    admin = true;
-  }
-  if (req.cookies.user_role && req.cookies.user_id) {
-    loggedIn = true;
-  }
   axios.get(`http://localhost:3001/orders/user/${req.cookies.user_id}`)
     .then(function (response) {
       res.render('orders', {
         title: 'Order History',
         css: 'stylesheets/orders-style.css',
         navHtml: '',
-        logged_in: loggedIn,
-        admin: admin,
+        admin: res.locals.admin,
+        logged_in: res.locals.loggedIn,
+        user: res.locals.user,
         orders: response.data
       });
     })
@@ -34,14 +27,11 @@ router.post("/", function (req, res, next) {
     "headers": {
       "content-type": "application/json",
     }
-  })
-    .then(function (response) {
-      console.log(response);
-      res.status(200).send(`Adding order`);
-    })
-    .catch(function (error) {
-      res.status(400).send({ message: "Bad request" });
-    });
+  }).then(function (response) {
+    res.status(200).send(`Adding order`);
+  }).catch(function (error) {
+    res.status(400).send({ message: "Bad request" });
+  });
 });
 
 module.exports = router;

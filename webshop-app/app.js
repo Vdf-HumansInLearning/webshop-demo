@@ -20,53 +20,40 @@ dotenv.config();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// middleware
-let getUser = function(req, res, next) {
-    console.log('LOGGED');
-
-    if (!req.url.startsWith('/stylesheets') && !req.url.startsWith('/javascripts')) {
-        let admin = false;
-        let loggedIn = false;
-        if (req.cookies.user_role === "admin") {
-            admin = true;
-        }
-
-        req.admin = admin;
-
-        if (req.cookies.user_role && req.cookies.user_id) {
-            loggedIn = true;
-        }
-
-        req.loggedIn = loggedIn;
-
-        if (loggedIn) {
-            axios.get(`http://localhost:3001/users/${req.cookies.user_id}`)
-                .then(function(response) {
-                    // handle success
-                    const user = response.data;
-                    req.user = user;
-                    console.log(user);
-                    next();
-                })
-                // .catch(function(error) {
-                //     // handle error
-                //     res.status(400).send("404 Not Found");
-                // });
-        }
-        // console.log('LOGGED');
-    }
-    console.log('LOGGED');
-    next();
-}
-
-
-
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/public')));
+
+// get user middleware that runs before each request
+const getUser = function (req, res, next) {
+    if (!(req.url.startsWith('/stylesheets') ||
+        req.url.startsWith('/javascripts') ||
+        req.url.startsWith('/favicon'))) {
+
+        // express requires the use of res.locals object for passing custom data 
+        res.locals.admin = req.cookies.user_role === "admin";
+        res.locals.loggedIn = req.cookies.user_role && req.cookies.user_id;
+
+        if (res.locals.loggedIn) {
+            axios.get(`http://localhost:3001/users/${req.cookies.user_id}`)
+                .then(function (response) {
+                    res.locals.user = response.data;
+                    next();
+                })
+                .catch(function (error) {
+                    // handle error
+                    res.status(400).send("404 Not Found");
+                });
+        } else {
+            // if user is not logged in, send request to next middleware immediately
+            next();
+        }
+    } else {
+        next();
+    }
+};
 app.use(getUser);
 
 app.use('/', indexRouter);
@@ -78,12 +65,15 @@ app.use('/auth', authRouter);
 app.use('/orders', ordersRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
+    // log the error
+    console.log(err);
+
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
