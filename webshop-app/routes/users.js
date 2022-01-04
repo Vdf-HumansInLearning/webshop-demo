@@ -5,14 +5,6 @@ const router = express.Router();
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-  let admin = false;
-  let loggedIn = false;
-  if (req.cookies.user_role === "admin") {
-    admin = true;
-  }
-  if (req.cookies.user_role && req.cookies.user_id) {
-    loggedIn = true;
-  }
   axios.get('http://localhost:3001/users')
     .then(function (response) {
       // handle success
@@ -21,8 +13,9 @@ router.get('/', function (req, res, next) {
         css: 'stylesheets/users-style.css',
         navHtml: '',
         users: response.data,
-        admin: admin,
-        logged_in: loggedIn
+        admin: res.locals.admin,
+        logged_in: res.locals.loggedIn,
+        user: res.locals.user
       });
     })
     .catch(function (error) {
@@ -32,27 +25,27 @@ router.get('/', function (req, res, next) {
 
 });
 
-router.put('/:id', function(req, res, next) {
-  console.log(req.body);
+router.put('/:id', function (req, res, next) {
   axios.put(`http://localhost:3001/users/${req.params.id}`, {
-    street : req.body.street,
-    suite : req.body.suite,
-    city : req.body.city,
-    zipcode : req.body.zipcode,
-    phone : req.body.phone,
-  },{
-  "headers": {
-    "content-type": "application/json",
-  }})
-  .then(function (response) {
-    // handle success
-    res.send("Successfully registered");
+    street: req.body.street,
+    suite: req.body.suite,
+    city: req.body.city,
+    zipcode: req.body.zipcode,
+    phone: req.body.phone,
+  }, {
+    "headers": {
+      "content-type": "application/json",
+    }
   })
-  .catch(function (error) {
-    // handle error
-    res.status(400).send({ message: "Bad request" });
-  });
-  
+    .then(function (response) {
+      // handle success
+      res.send("Successfully registered");
+    })
+    .catch(function (error) {
+      // handle error
+      res.status(400).send({ message: "Bad request" });
+    });
+
 });
 
 router.delete('/:id', function (req, res) {

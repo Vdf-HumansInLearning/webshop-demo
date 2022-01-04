@@ -3,19 +3,14 @@ const axios = require('axios').default;
 const router = express.Router();
 
 router.get('/login', function(req, res, next) {
-  let loggedIn = false;
-  if(req.cookies.user_role && req.cookies.user_id){
-    loggedIn = true;
-  }
   res.render('login', { 
     title: 'Login',
     css: 'stylesheets/login-style.css',
-    logged_in : loggedIn
+    logged_in: res.locals.loggedIn,
   });
 });
 
 router.post('/login', function(req, res, next) {
-  console.log(req.body);
   axios.post(`http://localhost:3001/auth/login`, {
     email : req.body.email,
     password : req.body.password

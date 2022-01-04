@@ -4,14 +4,6 @@ const router = express.Router();
 
 /* GET Phones home page. */
 router.get('/', function (req, res, next) {
-  let admin = false;
-  let loggedIn = false;
-  if (req.cookies.user_role === "admin") {
-    admin = true;
-  }
-  if (req.cookies.user_role && req.cookies.user_id) {
-    loggedIn = true;
-  }
   axios.get(`${process.env.API_HOST}:${process.env.API_PORT}/phones`, { params: req.query })
     .then(function (response) {
       // send phones and filters to render method
@@ -21,8 +13,9 @@ router.get('/', function (req, res, next) {
         products: response.data.products,
         filters: response.data.filters,
         selectedFilters: response.data.selectedFilters,
-        admin: admin,
-        logged_in: loggedIn
+        admin: res.locals.admin,
+        logged_in: res.locals.loggedIn,
+        user: res.locals.user
       });
     })
     .catch(function (error) {
@@ -58,15 +51,6 @@ router.post("/", function (req, res, next) {
 });
 
 router.get('/:phone', function (req, res, next) {
-  let admin = false;
-  let loggedIn = false;
-  if (req.cookies.user_role === "admin") {
-    admin = true;
-  }
-  if (req.cookies.user_role && req.cookies.user_id) {
-    loggedIn = true;
-  }
-
   axios.get(`${process.env.API_HOST}:${process.env.API_PORT}/phones`)
     .then(function (response) {
       // handle success
@@ -87,8 +71,9 @@ router.get('/:phone', function (req, res, next) {
         navHtml: '',
         phone: phone,
         average: average,
-        admin: admin,
-        logged_in: loggedIn
+        admin: res.locals.admin,
+        logged_in: res.locals.loggedIn,
+        user: res.locals.user
       });
     })
     .catch(function (error) {
@@ -124,7 +109,6 @@ router.put("/:id", function (req, res, next) {
 });
 
 router.delete('/:id', function (req, res) {
-  console.log(req.params.id);
   res.send(`Deleting phone ${req.params.id}`);
   axios.delete(`${process.env.API_HOST}:${process.env.API_PORT}/phones/${req.params.id}`, { data: req.params.id })
     .then(() => console.log('Phone has been deleted'))
