@@ -27,6 +27,20 @@
     padding-top:0.5rem
 }
 
+.breadcrumbs {
+    padding-top: 15px;
+    padding-left: 5px;
+}
+
+.breadcrumbs-link {
+    text-decoration: none;
+    color: black;
+}
+
+.breadcrumbs-link:hover {
+    color: #808080;
+}
+
 @media (min-width: 992px) {
     .dropdown-menu[data-bs-popper] {
         left: -100px;
