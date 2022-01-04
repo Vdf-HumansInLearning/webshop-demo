@@ -5,7 +5,7 @@
       <li class="breadcrumb-item active" aria-current="page">Data</li> -->
     <% for (let i=0; i < breadcrumbs.length; i++) { %>
       <% if(breadcrumbs[i].link){ %>
-        <li class="breadcrumb-item"><a href="<%= breadcrumbs[i].link %>">
+        <li class="breadcrumb-item"><a class="breadcrumbs-link" href="<%= breadcrumbs[i].link %>">
             <%= breadcrumbs[i].name %>
           </a></li>
         <% } else { %>

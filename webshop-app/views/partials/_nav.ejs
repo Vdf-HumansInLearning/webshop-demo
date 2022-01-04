@@ -21,7 +21,7 @@
                 </ul>
 
                 <div class="d-lg-flex d-block">
-                    <% if(logged_in){ %>
+                    
                         <div class="nav-item">
                             <a class="nav-link p-0 p-lg-2" href="/cart" id="shopping-cart" role="button">
                                 <i class="fas fa-shopping-cart d-none d-lg-inline"></i>
@@ -29,7 +29,7 @@
                                 <span class="badge bg-secondary" id="cart-items">0</span>
                             </a>
                         </div>
-
+                    <% if(logged_in){ %>
                         <div class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle p-lg-2" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="far fa-user d-none d-lg-inline"></i>
@@ -43,7 +43,8 @@
                             </ul>
                         </div>
                         <% } else{ %>
-                            <a role="button" class="btn btn-outline-secondary" href="/auth/login">Login</a>
+                            <a role="button" class="btn btn-outline-secondary d-none d-lg-inline" href="/auth/login">Login</a>
+                            <a class="nav-link d-lg-none" id="users-link" href="/auth/login">Login</a>
                             <% } %>
                 </div>
             </div>
