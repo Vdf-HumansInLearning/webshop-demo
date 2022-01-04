@@ -1,0 +1,18 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <!-- <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item"><a href="#">Library</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Data</li> -->
+    <% for (let i=0; i < breadcrumbs.length; i++) { %>
+      <% if(breadcrumbs[i].link){ %>
+        <li class="breadcrumb-item"><a href="<%= breadcrumbs[i].link %>">
+            <%= breadcrumbs[i].name %>
+          </a></li>
+        <% } else { %>
+          <li class="breadcrumb-item active">
+            <%= breadcrumbs[i].name %>
+          </li>
+          <% } %>
+            <% } %>
+  </ol>
+</nav>
