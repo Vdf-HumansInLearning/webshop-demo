@@ -4,64 +4,64 @@
 <body>
     <%- include('./partials/_nav'); %>
     <div class="menu pt-5">
-            <div class="filter-buttons justify-content-between d-md-flex">
-                <fieldset class="input-group mt-3 ps-2">
-                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
-                    <input class="form-control me-2" id="search-input" name="search" type="text" value="<%= selectedFilters.search %>" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1">
-                </fieldset>
-                <fieldset class="order input-group mt-3">
-                    <label class="input-group-text" for="sort"><i class="fas fa-sort"></i> Sort by: </label>
-                    <select name="sort" id="sort" class="form-select">
-                        <% if(selectedFilters.sort === "none"){ %>
-                            <option value="none" selected>-</option>
-                            <% } else{ %>  
-                            <option value="none">-</option>
-                        <% } %>
-                        <% if(selectedFilters.sort === "asc"){ %>
-                            <option value="asc" selected>Ascending price</option>
-                            <% } else{ %>  
-                            <option value="asc">Ascending price</option>
-                        <% } %>
-                        <% if(selectedFilters.sort === "desc"){ %>
-                            <option value="desc" selected>Descending price</option>
-                            <% } else{ %>  
-                            <option value="desc">Descending price</option>
-                        <% } %>
-                    </select>
-                </fieldset>
-                <div class="filter-toggle mt-3">
-                    <button id="toggle-filters" class="filter-btn btn btn-outline-secondary">Filter <i class="fas fa-filter"></i></button>
-                </div>
-            </div>
-        
-        <div class="filter"> 
-           
-
-            <form action="/phones" id="filter-form" class="hide-form filter-form" method="get">
-                <input type="hidden" id="hidden-search" name="search"/>
-                <input type="hidden" id="hidden-sort" name="sort"/>
-                <p class="filter-title mt-3">Filter the phones</p>
-                <fieldset id="filter-brand">
-                    <legend>Brand:</legend>
-                    <% for(let i = 0; i < filters.brand.length; i++) {%>
-                        <% if(selectedFilters.brand.includes(filters.brand[i])){ %>
-                            <input type="checkbox" id="<%= filters.brand[i] %>" name="brand[]" value="<%= filters.brand[i] %>" checked>
-                            <% } else{ %>  
-                            <input type="checkbox" id="<%= filters.brand[i] %>" name="brand[]" value="<%= filters.brand[i] %>">
-                        <% } %>
-                        <label><%= filters.brand[i] %></label>
-                        <br>
-                    <% } %>
-                </fieldset>
-                <fieldset id="filter-price" class="mt-2">
-                    <legend>Price:</legend>
-                    <% if(selectedFilters.price_range === "0_700"){ %>
-                        <input type="radio" name="price_range" id="range_0_700" value="0_700" checked><label>0-700 RON</label>
+        <div class="filter-buttons justify-content-between d-md-flex">
+            <fieldset class="input-group mt-3 ps-2">
+                <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
+                <input class="form-control me-2" id="search-input" name="search" type="text" value="<%= selectedFilters.search %>" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1">
+            </fieldset>
+            <fieldset class="order input-group mt-3">
+                <label class="input-group-text" for="sort"><i class="fas fa-sort"></i> Sort by: </label>
+                <select name="sort" id="sort" class="form-select">
+                    <% if(selectedFilters.sort === "none"){ %>
+                        <option value="none" selected>-</option>
                         <% } else{ %>  
-                        <input type="radio" name="price_range" id="range_0_700" value="0_700"><label>0-700 RON</label>
-                    <% } %>
-                    <br>
-                    <% if(selectedFilters.price_range === "701_4000"){ %>
+                            <option value="none">-</option>
+                            <% } %>
+                            <% if(selectedFilters.sort === "asc"){ %>
+                                <option value="asc" selected>Ascending price</option>
+                                <% } else{ %>  
+                                    <option value="asc">Ascending price</option>
+                                    <% } %>
+                                    <% if(selectedFilters.sort === "desc"){ %>
+                                        <option value="desc" selected>Descending price</option>
+                                        <% } else{ %>  
+                                            <option value="desc">Descending price</option>
+                                            <% } %>
+                                        </select>
+                                    </fieldset>
+                                    <div class="filter-toggle mt-3">
+                                        <button id="toggle-filters" class="filter-btn btn btn-outline-secondary">Filter <i class="fas fa-filter"></i></button>
+                                    </div>
+                                </div>
+                                
+                                <div class="filter"> 
+                                    
+                                    
+                                    <form action="/phones" id="filter-form" class="hide-form filter-form" method="get">
+                                        <input type="hidden" id="hidden-search" name="search"/>
+                                        <input type="hidden" id="hidden-sort" name="sort"/>
+                                        <p class="filter-title mt-3">Filter the phones</p>
+                                        <fieldset id="filter-brand">
+                                            <legend>Brand:</legend>
+                                            <% for(let i = 0; i < filters.brand.length; i++) {%>
+                                                <% if(selectedFilters.brand.includes(filters.brand[i])){ %>
+                                                    <input type="checkbox" id="<%= filters.brand[i] %>" name="brand[]" value="<%= filters.brand[i] %>" checked>
+                                                    <% } else{ %>  
+                                                        <input type="checkbox" id="<%= filters.brand[i] %>" name="brand[]" value="<%= filters.brand[i] %>">
+                                                        <% } %>
+                                                        <label><%= filters.brand[i] %></label>
+                                                        <br>
+                                                        <% } %>
+                                                    </fieldset>
+                                                    <fieldset id="filter-price" class="mt-2">
+                                                        <legend>Price:</legend>
+                                                        <% if(selectedFilters.price_range === "0_700"){ %>
+                                                            <input type="radio" name="price_range" id="range_0_700" value="0_700" checked><label>0-700 RON</label>
+                                                            <% } else{ %>  
+                                                                <input type="radio" name="price_range" id="range_0_700" value="0_700"><label>0-700 RON</label>
+                                                                <% } %>
+                                                                <br>
+                                                                <% if(selectedFilters.price_range === "701_4000"){ %>
                         <input type="radio" name="price_range" id="range_701_4000" value="701_4000" checked><label>701-4000 RON</label>
                         <% } else{ %>  
                             <input type="radio" name="price_range" id="range_701_4000" value="701_4000"><label>701-4000 RON</label>
@@ -108,6 +108,7 @@
         
     </div>
     <div id="container" class="container mt-3 mb-3">
+        <%- include('./partials/_breadcrumbs'); %>
         <% if(products.length > 0){ %>
             <div class="row" id="phone-row">
                 <% for(let i = 0; i < products.length; i++) {%>
