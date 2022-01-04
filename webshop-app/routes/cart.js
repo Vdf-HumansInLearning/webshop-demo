@@ -1,21 +1,14 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/', function(req, res, next) {
-  let admin = false;
-  let loggedIn = false;
-  if(req.cookies.user_role === "admin"){
-    admin = true;
-  }
-  if(req.cookies.user_role && req.cookies.user_id){
-    loggedIn = true;
-  }
-  res.render('cart', { 
+router.get('/', function (req, res, next) {
+  res.render('cart', {
     title: 'Cart',
     css: 'stylesheets/cart-style.css',
     navHtml: '',
-    logged_in : loggedIn,
-    admin : admin
+    admin: res.locals.admin,
+    logged_in: res.locals.loggedIn,
+    user: res.locals.user
   });
 });
 
