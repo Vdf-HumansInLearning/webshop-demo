@@ -1,0 +1,54 @@
+<div class="row g-3">
+  <h4><%= title %></h4>
+  <div class="col-12">
+    <% if(title === "Delivery Address"){ %>
+    <label for="delivery-address-dropdown">Choose an address:</label>
+    <select id="delivery-address-dropdown">
+      <option value="existing">Existing address</option>
+      <option value="new">New address</option>
+    </select>
+    <% } %> <% if(title === "Billing Address"){ %>
+    <label for="billing-address-dropdown">Choose an address:</label>
+    <select id="billing-address-dropdown">
+      <option value="existing">Existing address</option>
+      <option value="new">New address</option>
+    </select>
+    <% } %>
+  </div>
+  <div class="col-md-4">
+    <label for="inputStreet" class="form-label">Street</label>
+    <input
+      type="text"
+      class="form-control"
+      id="inputStreet"
+      value="<%= user.address.street %>"
+    />
+  </div>
+  <div class="col-md-4">
+    <label for="inputCity" class="form-label">City</label>
+    <input
+      type="text"
+      class="form-control"
+      id="inputCity"
+      value="<%= user.address.city %>"
+    />
+  </div>
+  <div class="col-md-4">
+    <label for="inputSuite" class="form-label">Suite</label>
+    <input
+      type="text"
+      class="form-control"
+      id="inputSuite"
+      value="<%= user.address.suite %>"
+    />
+  </div>
+  <div class="col-md-3">
+    <label for="inputZip" class="form-label">Zip</label>
+    <input
+      type="text"
+      class="form-control"
+      id="inputZip"
+      value="<%= user.address.zipcode %>"
+    />
+  </div>
+</div>
