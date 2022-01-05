@@ -12,3 +12,11 @@
     height: calc(100vh - 112px);
     margin: 0;
 }
+
+.footer {
+    position: absolute;
+}
+
+.footer-item > a:hover{
+    color: white;
+}
