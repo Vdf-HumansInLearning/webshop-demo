@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get('/login', function(req, res, next) {
   res.render('login', { 
-    title: 'Login',
+    title: 'Webstore - Login',
     css: 'stylesheets/login-style.css',
     logged_in: res.locals.loggedIn,
   });
@@ -46,7 +46,7 @@ router.get('/register', function(req, res, next) {
       registered = true;
     }
     res.render('register', { 
-      title: 'Register',
+      title: 'Webstore - Register',
       css: 'stylesheets/register-style.css',
       registered : registered
     });

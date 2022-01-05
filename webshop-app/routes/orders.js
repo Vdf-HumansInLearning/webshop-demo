@@ -6,7 +6,7 @@ router.get('/', function (req, res, next) {
   axios.get(`http://localhost:3001/orders/user/${req.cookies.user_id}`)
     .then(function (response) {
       res.render('orders', {
-        title: 'Order History',
+        title: 'Webstore - Order History',
         css: 'stylesheets/orders-style.css',
         navHtml: '',
         admin: res.locals.admin,

@@ -9,7 +9,7 @@ router.get('/', function (req, res, next) {
     .then(function (response) {
       // handle success
       res.render('users', {
-        title: 'Users',
+        title: 'Webstore - Users',
         css: 'stylesheets/users-style.css',
         navHtml: '',
         users: response.data,

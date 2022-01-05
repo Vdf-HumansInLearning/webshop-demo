@@ -4,7 +4,7 @@ const router = express.Router();
 router.get('/', function (req, res, next) {
 
   res.render('profile', {
-    title: 'Profile',
+    title: 'Webstore - Profile',
     css: 'stylesheets/profile-style.css',
     navHtml: '',
     admin: res.locals.admin,
