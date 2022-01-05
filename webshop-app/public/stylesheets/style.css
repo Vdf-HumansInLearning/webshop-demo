@@ -40,6 +40,37 @@
     color: #808080;
 }
 
+.footer {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    width: 100vw;
+    height: 100px;
+    padding: 25px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0;
+}
+
+.footer-list {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+}
+
+.footer-item {
+    margin: 20px;
+    font-size: 24px;
+}
+
+.footer-item > a {
+    color: black;
+}
+
+.footer-item > a:hover{
+    color: #f60000;
+}
+
 @media (min-width: 992px) {
     .dropdown-menu[data-bs-popper] {
         left: -100px;
