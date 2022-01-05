@@ -11,7 +11,7 @@ router.get("/", function (req, res, next) {
     .then(function (response) {
       // send phones and filters to render method
       res.render("phones", {
-        title: "Phones",
+        title: "Webstore - Phones",
         css: "stylesheets/phones-style.css",
         products: response.data.products,
         filters: response.data.filters,
@@ -81,7 +81,7 @@ router.get("/:phone", function (req, res, next) {
       );
 
       res.render("details", {
-        title: "Details",
+        title: "Webstore - " + phone.brand + ' ' + phone.name,
         css: "stylesheets/details-style.css",
         navHtml: "",
         phone: phone,

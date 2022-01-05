@@ -26,6 +26,10 @@
     color:#d0d0d0;
 }
 
+.footer {
+    position: absolute;
+}
+
 
 @media (max-width:576px) {
     .details {

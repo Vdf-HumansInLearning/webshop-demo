@@ -3,7 +3,7 @@ const router = express.Router();
 
 router.get('/', function (req, res, next) {
   res.render('cart', {
-    title: 'Cart',
+    title: 'Webstore Shopping Cart',
     css: 'stylesheets/cart-style.css',
     navHtml: '',
     admin: res.locals.admin,

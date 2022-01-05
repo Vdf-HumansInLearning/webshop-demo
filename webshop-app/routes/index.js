@@ -4,7 +4,7 @@ const axios = require('axios').default;
 
 router.get('/', function (req, res, next) {
   res.render('index', {
-    title: 'Home',
+    title: 'Webstore - Find your mobile',
     css: 'stylesheets/home-style.css',
     navHtml: '',
     admin: res.locals.admin,
