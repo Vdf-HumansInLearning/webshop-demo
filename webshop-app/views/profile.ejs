@@ -8,22 +8,28 @@
             <h3 class="main-title">You are not logged in.</h3>
             <a href="/auth/login">Go to Login page</a>
         <% } else{ %>  
-            <h3 class="main-title">Your Profile</h3>
-            <ul class="profile text-left">
-                <li>Name : <%= user.name %></li>
-                <li>Email : <%= user.email %></li>
+            <h3 class="main-title"><u>Your Profile</u></h3>
+            <dl class="profile mt-3">
+                <dt><strong>Name: </strong></dt>
+                <dd><%= user.name %></dd>
+                <dt><strong>Email: </strong></dt>
+                <dd><%= user.email %></dd>
                 <% if(user.address.street){ %>
-                    <li>Address : <%= user.address.street %> street, <%= user.address.suite %>, <%= user.address.zipcode %>, <%= user.address.city %></li>
+                    <dt><strong>Address: </strong></dt>
+                    <dd><%= user.address.street %> street, <%= user.address.suite %>, <%= user.address.zipcode %>, <%= user.address.city %></dd>
                 <% } else{ %> 
-                    <li>Address : You didn't saved an address yet.</li>
+                    <dt><strong>Address: </strong></dt>
+                    <dd>You didn't saved an address yet.</dd>
                 <% } %>
                 <% if(user.phone){ %>
-                    <li>Phone number : <%= user.phone %></li>
+                    <dt><strong>Phone number: </strong></dt>
+                    <dd><%= user.phone %></dd>
                 <% } else{ %> 
-                    <li>Phone number : You didn't saved a phone number yet.</li>
+                    <dt><strong>Phone number: </strong></dt>
+                    <dd>You didn't saved a phone number yet.</dd>
                 <% } %>
-            </ul>
-            <a href="/profile/edit"><button class="btn btn-outline-danger">Edit profile</button></a>
+            </dl>
+            <a href="/profile/edit" class="mt-3"><button class="btn btn-outline-danger">Edit profile</button></a>
         <% } %>
     </div>
 

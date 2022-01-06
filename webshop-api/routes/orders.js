@@ -29,7 +29,6 @@ router.get('/user/:id', function (req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-  console.log(req.body.data);
   let orders = JSON.parse(fs.readFileSync('./data/orders.json', 'utf8'));
   let users = JSON.parse(fs.readFileSync('./data/users.json', 'utf8'));
   let products = JSON.parse(fs.readFileSync('./data/phones.json', 'utf8'));
