@@ -21,7 +21,6 @@ router.post('/login', function(req, res, next) {
     .then(function (response) {
       // handle success
       const user = response.data;
-      console.log(user);
       if(user){
         res.cookie('user_id', user.id).cookie('user_role', user.role).send('cookie set');
       } else {
@@ -53,7 +52,6 @@ router.get('/register', function(req, res, next) {
   });
   
 router.post('/register', function(req, res, next) {
-    console.log(req.body);
     axios.post(`http://localhost:3001/auth/register`, {
       name: req.body.first_name + " " + req.body.last_name,
       username: req.body.username,

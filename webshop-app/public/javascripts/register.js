@@ -23,7 +23,6 @@ if(form) {
                 body: JSON.stringify({ username : username.value, first_name : firstName.value, last_name : lastName.value, email : email.value, password : password.value})
             })
             .then(data => {
-                console.log(data);
                 if(data.status === 200){
                     var myModal = new bootstrap.Modal(document.getElementById("register-success"), {});
                     myModal.show();

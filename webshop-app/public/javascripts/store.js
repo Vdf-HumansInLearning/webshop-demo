@@ -20,8 +20,6 @@ document.getElementById("phones-link").classList = "nav-link active";
         let searchInput = document.getElementById("search-input").value;
         let sortSelected = document.getElementById("sort").value;
         let rating = document.getElementById("minimum_rating");
-        console.log(searchInput !== "");
-        console.log(sortSelected !== "none");
         if(searchInput !== ""){
             document.getElementById("hidden-search").value = searchInput;
         } else {
@@ -65,7 +63,6 @@ document.getElementById("phones-link").classList = "nav-link active";
                 window.location.href += "?sort=" + document.getElementById("sort").value;
             } else {
                 url.searchParams.delete('sort');
-                console.log(url.href)
                 if("http://localhost:3000/phones" === url.href){
                     window.location.href = url.href + "?sort=" + document.getElementById("sort").value;
                 } else {
@@ -124,7 +121,6 @@ document.getElementById("phones-link").classList = "nav-link active";
                         count +=1;              
                     }
                 }
-                console.log(count);
                 if(count < 1){
                     parsedObject.push({name: name, price : price, quantity : 1 });
                     document.getElementById("cart-items").textContent = Number(document.getElementById("cart-items").textContent) + 1;
@@ -174,7 +170,6 @@ document.getElementById("phones-link").classList = "nav-link active";
                 {
                     rating = -1;
                 }
-                // console.log(brand, name, os, price, discount, quantity, date, rating);
                 if(item.id === "add-brand") {
                     if(brand.match(regexLetters) && brand.length >= 1 && brand.length <= 30) {
                         document.getElementById("invalid-brand-add").style.display = "none";
@@ -512,7 +507,6 @@ document.getElementById("phones-link").classList = "nav-link active";
 
         editBtn.forEach( item => {
             item.addEventListener('click', () => {
-                console.log(item.parentElement.id);
                 fetch(`http://localhost:3001/phones/${item.parentElement.id}`)
                 .then(response => response.json())
                 .then(data => {

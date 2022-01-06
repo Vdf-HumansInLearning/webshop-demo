@@ -97,10 +97,8 @@ router.post("/", function (req, res, next) {
 
 // delete
 router.delete('/:id', function (req, res) {
-  console.log(req.params.id);
   let phones = JSON.parse(fs.readFileSync('./data/phones.json', 'utf8'));
   let phone = phones.find(phone => phone.id == req.params.id)
-  console.log(phone);
   if (phone) {
     let updatedPhones = phones.filter(phone => phone.id != req.params.id);
     fs.writeFile('./data/phones.json', JSON.stringify(updatedPhones), function (err) {
