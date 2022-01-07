@@ -5,6 +5,14 @@ const router = express.Router();
 router.get('/', function (req, res, next) {
   axios.get(`http://localhost:3001/orders/user/${req.cookies.user_id}`)
     .then(function (response) {
+
+      let dates = response.data.map(order => new Date(order.date)).map(date => date.getDate()+
+      "/"+(date.getMonth()+1)+
+      "/"+date.getFullYear()+
+      " "+date.getHours()+
+      ":"+date.getMinutes()+
+      ":"+date.getSeconds());
+      
       res.render('orders', {
         title: 'Webstore - Order History',
         css: 'stylesheets/orders-style.css',
@@ -12,7 +20,8 @@ router.get('/', function (req, res, next) {
         admin: res.locals.admin,
         logged_in: res.locals.loggedIn,
         user: res.locals.user,
-        orders: response.data
+        orders: response.data,
+        dates: dates
       });
     })
     .catch(function (error) {

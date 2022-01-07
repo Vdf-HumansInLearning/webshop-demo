@@ -33,9 +33,9 @@ router.post("/", function (req, res, next) {
   let users = JSON.parse(fs.readFileSync("./data/users.json", "utf8"));
   let products = JSON.parse(fs.readFileSync("./data/phones.json", "utf8"));
   let user = users.find((user) => user.id == req.body.data.user);
-  let today = new Date();
-  let date =
-    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+  // let today = new Date();
+  // let date =
+  //   today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
   if (user && req.body.data) {
     let order = {
       id: uuid.v1(),
@@ -57,7 +57,7 @@ router.post("/", function (req, res, next) {
       phone: user.phone,
       order: req.body.data.items,
       payment: "card",
-      date: date,
+      date: Date.now(),
       total: req.body.data.total,
     };
 

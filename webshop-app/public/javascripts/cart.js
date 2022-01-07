@@ -174,6 +174,9 @@ if (localStorageItems && localStorageObject.length > 0) {
     orderBtnDiv.setAttribute("data-bs-toggle", "tooltip");
     orderBtnDiv.setAttribute("data-bs-placement", "bottom");
     orderBtnDiv.setAttribute("title", "You need to log in before ordering");
+  } else {
+    let containerHeight = document.getElementById("container");
+    containerHeight.style.minHeight = "0vh";
   }
   orderBtn.textContent = "Place Order";
   orderBtnDiv.appendChild(orderBtn);
