@@ -6,6 +6,12 @@
     color: rgba(255,255,255,.55);
 }
 
+.container, .main {
+    min-height: 80vh;
+}
+
+
+
 .user-profile {
     text-decoration: none;
     color:white;
