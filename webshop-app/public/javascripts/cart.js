@@ -1,6 +1,63 @@
 let localStorageItems = localStorage.getItem("items");
 let localStorageObject = JSON.parse(localStorageItems);
 
+deliveryStreet = "";
+deliveryCity = "";
+deliverySuite = "";
+deliveryZipcode = "";
+billingStreet = "";
+billingCity = "";
+billingSuite = "";
+billingZipcode = "";
+
+function handleAddressChange(id) {
+  let dropdown = document.getElementById(id + "-dropdown");
+  //let valueOfDelivery =
+  //  deliveryDropdown.options[deliveryDropdown.selectedIndex].value;
+  if (dropdown) {
+    dropdown.addEventListener("change", (event) => {
+      if (event.target.value === "new") {
+        let formControls = document
+          .getElementById(id)
+          .querySelectorAll(".form-control");
+        if (id === "delivery-address") {
+          deliveryStreet = formControls[0].value;
+          deliveryCity = formControls[1].value;
+          deliverySuite = formControls[2].value;
+          deliveryZipcode = formControls[3].value;
+        }
+        if (id === "billing-address") {
+          billingStreet = formControls[0].value;
+          billingCity = formControls[1].value;
+          billingSuite = formControls[2].value;
+          billingZipcode = formControls[3].value;
+        }
+        formControls.forEach((element) => (element.value = ""));
+      }
+      if (event.target.value === "existing") {
+        let formControls = document
+          .getElementById(id)
+          .querySelectorAll(".form-control");
+        if (id === "delivery-address") {
+          formControls[0].value = deliveryStreet;
+          formControls[1].value = deliveryCity;
+          formControls[2].value = deliverySuite;
+          formControls[3].value = deliveryZipcode;
+        }
+        if (id === "billing-address") {
+          formControls[0].value = billingStreet;
+          formControls[1].value = billingCity;
+          formControls[2].value = billingSuite;
+          formControls[3].value = billingZipcode;
+        }
+      }
+    });
+  }
+}
+
+handleAddressChange("delivery-address");
+handleAddressChange("billing-address");
+
 if (localStorageItems && localStorageObject.length > 0) {
   document.getElementById("cart-items").textContent = localStorageObject.length;
   let orderH3 = document.createElement("h3");
@@ -120,7 +177,7 @@ if (localStorageItems && localStorageObject.length > 0) {
   }
   orderBtn.textContent = "Place Order";
   orderBtnDiv.appendChild(orderBtn);
-  document.getElementById("container").appendChild(orderBtnDiv);
+  document.getElementById("address-container").appendChild(orderBtnDiv);
 
   let modalDiv = document.createElement("div");
   modalDiv.setAttribute("class", "modal");
@@ -297,6 +354,7 @@ if (localStorageItems && localStorageObject.length > 0) {
     let orderTotal = Number(
       document.getElementById("order-total").lastChild.textContent.slice(0, -4)
     );
+
     fetch("http://localhost:3000/orders", {
       method: "post",
       headers: {
@@ -306,6 +364,18 @@ if (localStorageItems && localStorageObject.length > 0) {
         items: localStorageObject,
         total: orderTotal,
         user: cookieValue,
+        delivery_address: {
+          street: deliveryStreet,
+          city: deliveryCity,
+          suite: deliverySuite,
+          zipcode: deliveryZipcode,
+        },
+        billing_address: {
+          street: billingStreet,
+          city: billingCity,
+          suite: billingSuite,
+          zipcode: billingZipcode,
+        },
       }),
     }).then((data) => {
       if (data.status === 200) {
@@ -334,62 +404,5 @@ if (localStorageItems && localStorageObject.length > 0) {
   document.getElementById("container").classList.add("text-center");
   document.getElementById("container").appendChild(emptyCart);
   document.getElementById("container").appendChild(phonePageLink);
+  document.getElementById("address-container").style.display = "none";
 }
-
-deliveryStreet = "";
-deliveryCity = "";
-deliverySuite = "";
-deliveryZipcode = "";
-billingStreet = "";
-billingCity = "";
-billingSuite = "";
-billingZipcode = "";
-
-function handleAddressChange(id) {
-  let dropdown = document.getElementById(id + "-dropdown");
-  //let valueOfDelivery =
-  //  deliveryDropdown.options[deliveryDropdown.selectedIndex].value;
-  if(dropdown){
-    dropdown.addEventListener("change", (event) => {
-      if (event.target.value === "new") {
-        let formControls = document
-          .getElementById(id)
-          .querySelectorAll(".form-control");
-        if (id === "delivery-address") {
-          deliveryStreet = formControls[0].value;
-          deliveryCity = formControls[1].value;
-          deliverySuite = formControls[2].value;
-          deliveryZipcode = formControls[3].value;
-        }
-        if (id === "billing-address") {
-          billingStreet = formControls[0].value;
-          billingCity = formControls[1].value;
-          billingSuite = formControls[2].value;
-          billingZipcode = formControls[3].value;
-        }
-        formControls.forEach((element) => (element.value = ""));
-      }
-      if (event.target.value === "existing") {
-        let formControls = document
-          .getElementById(id)
-          .querySelectorAll(".form-control");
-        if (id === "delivery-address") {
-          formControls[0].value = deliveryStreet;
-          formControls[1].value = deliveryCity;
-          formControls[2].value = deliverySuite;
-          formControls[3].value = deliveryZipcode;
-        }
-        if (id === "billing-address") {
-          formControls[0].value = billingStreet;
-          formControls[1].value = billingCity;
-          formControls[2].value = billingSuite;
-          formControls[3].value = billingZipcode;
-        }
-      }
-    });
-  }
-  
-}
-
-handleAddressChange("delivery-address");
-handleAddressChange("billing-address");
