@@ -1,4 +1,4 @@
-<div class="row g-3">
+<div class="row g-3 address-section">
   <h4><%= title %></h4>
   <div class="col-12">
     <% if(title === "Delivery Address"){ %>
@@ -16,39 +16,55 @@
     <% } %>
   </div>
   <div class="col-md-4">
-    <label for="inputStreet" class="form-label">Street</label>
-    <input
-      type="text"
-      class="form-control"
-      id="inputStreet"
-      value="<%= user.address.street %>"
-    />
+    <div class="input-group">
+      <span class="input-group-text" id="inputGroupPrepend1">Street</span>
+      <input
+        type="text"
+        class="form-control"
+        id="inputStreet"
+        value="<%= user.address.street %>"
+        aria-describedby="inputGroupPrepend1"
+        required
+      />
+    </div>
   </div>
   <div class="col-md-4">
-    <label for="inputCity" class="form-label">City</label>
-    <input
-      type="text"
-      class="form-control"
-      id="inputCity"
-      value="<%= user.address.city %>"
-    />
+    <div class="input-group">
+      <span class="input-group-text" id="inputGroupPrepend2">City</span>
+      <input
+        type="text"
+        class="form-control"
+        id="inputCity"
+        value="<%= user.address.city %>"
+        aria-describedby="inputGroupPrepend2"
+        required
+      />
+    </div>
   </div>
   <div class="col-md-4">
-    <label for="inputSuite" class="form-label">Suite</label>
-    <input
-      type="text"
-      class="form-control"
-      id="inputSuite"
-      value="<%= user.address.suite %>"
-    />
+    <div class="input-group">
+      <span class="input-group-text" id="inputGroupPrepend3">Suite</span>
+      <input
+        type="text"
+        class="form-control"
+        id="inputSuite"
+        value="<%= user.address.suite %>"
+        aria-describedby="inputGroupPrepend3"
+        required
+      />
+    </div>
   </div>
   <div class="col-md-3">
-    <label for="inputZip" class="form-label">Zip</label>
-    <input
-      type="text"
-      class="form-control"
-      id="inputZip"
-      value="<%= user.address.zipcode %>"
-    />
+    <div class="input-group">
+      <span class="input-group-text" id="inputGroupPrepend4">Zip</span>
+      <input
+        type="text"
+        class="form-control"
+        id="inputZip"
+        value="<%= user.address.zipcode %>"
+        aria-describedby="inputGroupPrepend4"
+        required
+      />
+    </div>
   </div>
 </div>

@@ -3,27 +3,23 @@ let localStorageObject = JSON.parse(localStorageItems);
 
 if (localStorageItems && localStorageObject.length > 0) {
   document.getElementById("cart-items").textContent = localStorageObject.length;
-  let orderH3 = document.createElement("h3");
-  orderH3.textContent = "Order Summary";
   let orderDiv = document.createElement("div");
   orderDiv.setAttribute("class", "order");
   orderDiv.setAttribute("id", "order");
-  document.getElementById("container").appendChild(orderH3);
   document.getElementById("container").appendChild(orderDiv);
   let totalPrice = 0;
   for (let i = 0; i < localStorageObject.length; i++) {
     let itemDiv = document.createElement("div");
-    itemDiv.setAttribute(
-      "class",
-      "d-flex justify-content-between align-items-center p-2 item-container"
-    );
+    itemDiv.setAttribute("class", "p-2 item-container");
     let h4 = document.createElement("h4");
-    h4.textContent = "- " + localStorageObject[i].name;
+    h4.setAttribute("class", "item-container-product");
+    h4.textContent = localStorageObject[i].name;
     let quantityDiv = document.createElement("div");
+    quantityDiv.setAttribute("class", "quantity-div");
     let quantityTitle = document.createElement("p");
     quantityTitle.textContent = "Quantity";
     let qtySpanDiv = document.createElement("div");
-    qtySpanDiv.setAttribute("class", "d-flex justify-content-between");
+    qtySpanDiv.setAttribute("class", "select-quantity");
     let spanMinus = document.createElement("span");
     let buttonMinus = document.createElement("button");
     buttonMinus.setAttribute("class", "quantity-btn minus-btn");
@@ -31,7 +27,7 @@ if (localStorageItems && localStorageObject.length > 0) {
       buttonMinus.disabled = true;
     }
     let iconMinus = document.createElement("i");
-    iconMinus.setAttribute("class", "far fa-minus-square mx-2");
+    iconMinus.setAttribute("class", "fas fa-minus-circle mx-2");
     buttonMinus.appendChild(iconMinus);
     spanMinus.appendChild(buttonMinus);
     let quantity = document.createElement("p");
@@ -44,7 +40,7 @@ if (localStorageItems && localStorageObject.length > 0) {
       buttonPlus.disabled = true;
     }
     let iconPlus = document.createElement("i");
-    iconPlus.setAttribute("class", "far fa-plus-square mx-2");
+    iconPlus.setAttribute("class", "fas fa-plus-circle mx-2");
     spanPlus.appendChild(buttonPlus);
     buttonPlus.appendChild(iconPlus);
     qtySpanDiv.appendChild(spanMinus);
@@ -55,9 +51,11 @@ if (localStorageItems && localStorageObject.length > 0) {
     quantityDiv.appendChild(qtySpanDiv);
 
     let priceDiv = document.createElement("div");
+    priceDiv.setAttribute("class", "price-div");
     let priceTitle = document.createElement("p");
     priceTitle.textContent = "Price";
     let price = document.createElement("p");
+    price.setAttribute("class", "price");
     price.textContent =
       `${localStorageObject[i].quantity} x ${localStorageObject[i].price} = ` +
       Number(localStorageObject[i].price) * localStorageObject[i].quantity +
@@ -68,6 +66,7 @@ if (localStorageItems && localStorageObject.length > 0) {
     priceDiv.appendChild(price);
 
     let removeDiv = document.createElement("div");
+    removeDiv.setAttribute("class", "remove-div");
     let removeBtn = document.createElement("button");
     removeBtn.setAttribute("class", "delete-item");
     removeBtn.setAttribute("data-bs-toggle", "modal");
@@ -171,7 +170,7 @@ if (localStorageItems && localStorageObject.length > 0) {
   }
   orderBtn.textContent = "Place Order";
   orderBtnDiv.appendChild(orderBtn);
-  document.getElementById("address-container").appendChild(orderBtnDiv);
+  document.getElementById("billing-address").appendChild(orderBtnDiv);
 
   let modalDiv = document.createElement("div");
   modalDiv.setAttribute("class", "modal");

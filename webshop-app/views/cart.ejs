@@ -6,15 +6,23 @@
     <div class="invalid bg-danger mt-5 d-none text-center" id="invalid-order">
       <p class="text-white p-3">An error occured! Please try again later.</p>
     </div>
-    <div class="container mt-3 pt-5" id="container"></div>
+    <div class="container mt-5 pt-5" id="container">
+      <div class="section-title">
+        <span class="section-number">1</span>
+        <h3>Order Summary</h3>
+      </div>
+    </div>
     <% if(logged_in){ %>
     <div class="container mt-3 pt-5" id="address-container">
-      <h3>Select Address</h3>
-      <form>
+      <div class="section-title">
+        <span class="section-number">2</span>
+        <h3>Select Address</h3>
+      </div>
+      <form class="p-2 address-form">
         <div class="mb-3" id="delivery-address">
           <%- include('./partials/_address',{title:"Delivery Address"}); %>
         </div>
-        <div class="mb-5" id="billing-address">
+        <div id="billing-address">
           <%- include('./partials/_address',{title:"Billing Address"}); %>
         </div>
       </form>
