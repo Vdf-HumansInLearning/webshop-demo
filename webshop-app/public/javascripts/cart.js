@@ -1,8 +1,29 @@
 let localStorageItems = localStorage.getItem("items");
 let localStorageObject = JSON.parse(localStorageItems);
+let deliveryFormControls = [];
+let billingFormControls = [];
+let deliveryStreet = "";
+let deliveryCity = "";
+let deliverySuite = "";
+let deliveryZipcode = "";
+let billingStreet = "";
+let billingCity = "";
+let billingSuite = "";
+let billingZipcode = "";
 
 if (localStorageItems && localStorageObject.length > 0) {
   document.getElementById("cart-items").textContent = localStorageObject.length;
+  let orderTitleDiv = document.createElement('div');
+  orderTitleDiv.setAttribute('class','section-title');
+  let sectionNumber = document.createElement('span');
+  sectionNumber.setAttribute('class','section-number');
+  sectionNumber.textContent = "1";
+  let orderTitleH3 = document.createElement('h3');
+  orderTitleH3.textContent = "Order Summary";
+  orderTitleDiv.appendChild(sectionNumber);
+  orderTitleDiv.appendChild(orderTitleH3);
+  document.getElementById("container").appendChild(orderTitleDiv);
+
   let orderDiv = document.createElement("div");
   orderDiv.setAttribute("class", "order");
   orderDiv.setAttribute("id", "order");
@@ -99,23 +120,21 @@ if (localStorageItems && localStorageObject.length > 0) {
   totalDiv.appendChild(totalPriceH4);
   orderDiv.appendChild(totalDiv);
 
-  let deliveryFormControls = document
-    .getElementById("delivery-address")
-    .querySelectorAll(".form-control");
-  let billingFormControls = document
-    .getElementById("billing-address")
-    .querySelectorAll(".form-control");
+if(document.getElementById("delivery-address") && document.getElementById("billing-address")){
+  deliveryFormControls = document.getElementById("delivery-address").querySelectorAll(".form-control");
+  deliveryStreet = deliveryFormControls[0].value;
+  deliveryCity = deliveryFormControls[1].value;
+  deliverySuite = deliveryFormControls[2].value;
+  deliveryZipcode = deliveryFormControls[3].value;
+  billingFormControls = document.getElementById("billing-address").querySelectorAll(".form-control");
+  billingStreet = billingFormControls[0].value;
+  billingCity = billingFormControls[1].value;
+  billingSuite = billingFormControls[2].value;
+  billingZipcode = billingFormControls[3].value;
 
-  let deliveryStreet = deliveryFormControls[0].value;
-  let deliveryCity = deliveryFormControls[1].value;
-  let deliverySuite = deliveryFormControls[2].value;
-  let deliveryZipcode = deliveryFormControls[3].value;
-
-  let billingStreet = billingFormControls[0].value;
-  let billingCity = billingFormControls[1].value;
-  let billingSuite = billingFormControls[2].value;
-  let billingZipcode = billingFormControls[3].value;
-
+  handleAddressChange("delivery-address");
+  handleAddressChange("billing-address");
+}
   function handleAddressChange(id) {
     let dropdown = document.getElementById(id + "-dropdown");
     let formControls = document
@@ -144,8 +163,7 @@ if (localStorageItems && localStorageObject.length > 0) {
     }
   }
 
-  handleAddressChange("delivery-address");
-  handleAddressChange("billing-address");
+  
 
   let orderBtnDiv = document.createElement("div");
   orderBtnDiv.setAttribute("class", "d-flex justify-content-end mt-3");
@@ -167,10 +185,12 @@ if (localStorageItems && localStorageObject.length > 0) {
   } else {
     let containerHeight = document.getElementById("container");
     containerHeight.style.minHeight = "0vh";
+
+    orderBtn.textContent = "Place Order";
+    orderBtnDiv.appendChild(orderBtn);
+    document.getElementById("billing-address").appendChild(orderBtnDiv);
   }
-  orderBtn.textContent = "Place Order";
-  orderBtnDiv.appendChild(orderBtn);
-  document.getElementById("billing-address").appendChild(orderBtnDiv);
+  
 
   let modalDiv = document.createElement("div");
   modalDiv.setAttribute("class", "modal");
@@ -206,7 +226,7 @@ if (localStorageItems && localStorageObject.length > 0) {
   modalFooterCancelBtn.setAttribute("data-bs-dismiss", "modal");
   modalFooterCancelBtn.textContent = "Close";
   let modalFooterDeleteBtn = document.createElement("button");
-  modalFooterDeleteBtn.setAttribute("id", "delete-user");
+  modalFooterDeleteBtn.setAttribute("id", "delete-item");
   modalFooterDeleteBtn.setAttribute("type", "button");
   modalFooterDeleteBtn.setAttribute("class", "btn btn-danger");
   modalFooterDeleteBtn.textContent = "Delete item";
@@ -223,6 +243,8 @@ if (localStorageItems && localStorageObject.length > 0) {
   const plusBtns = document.querySelectorAll(".plus-btn");
   minusBtns.forEach((item) => {
     item.addEventListener("click", () => {
+      console.log(item.parentElement.parentElement.parentElement.parentElement.firstChild.textContent);
+      console.log(item.parentElement.nextSibling.textContent);
       if (Number(item.parentElement.nextSibling.textContent) > 0) {
         item.parentElement.nextSibling.textContent =
           Number(item.parentElement.nextSibling.textContent) - 1;
@@ -230,11 +252,11 @@ if (localStorageItems && localStorageObject.length > 0) {
         for (let i = 0; i < localStorageObject.length; i++) {
           if (
             localStorageObject[i].name ===
-            item.parentElement.parentElement.parentElement.parentElement.firstChild.textContent.slice(
-              2
-            )
+            item.parentElement.parentElement.parentElement.parentElement.firstChild.textContent
           ) {
+            console.log(localStorageObject[i].quantity);
             localStorageObject[i].quantity -= 1;
+            console.log(localStorageObject[i].quantity);
             item.parentElement.parentElement.parentElement.nextSibling.lastChild.textContent =
               `${localStorageObject[i].quantity} x ${localStorageObject[i].price} = ` +
               Number(localStorageObject[i].price) *
@@ -255,6 +277,7 @@ if (localStorageItems && localStorageObject.length > 0) {
             document.getElementById("cart-items").textContent =
               localStorageObject.length;
           } else {
+            localStorage.setItem("items", JSON.stringify(localStorageObject));
             total +=
               Number(localStorageObject[i].price) *
               localStorageObject[i].quantity;
@@ -276,9 +299,7 @@ if (localStorageItems && localStorageObject.length > 0) {
       for (let i = 0; i < localStorageObject.length; i++) {
         if (
           localStorageObject[i].name ===
-          item.parentElement.parentElement.parentElement.parentElement.firstChild.textContent.slice(
-            2
-          )
+          item.parentElement.parentElement.parentElement.parentElement.firstChild.textContent
         ) {
           localStorageObject[i].quantity += 1;
           item.parentElement.parentElement.parentElement.nextSibling.lastChild.textContent =
@@ -309,14 +330,16 @@ if (localStorageItems && localStorageObject.length > 0) {
   deleteBtns.forEach((item) => {
     item.addEventListener("click", () => {
       document
-        .getElementById("delete-user")
+        .getElementById("delete-item")
         .addEventListener("click", function (e) {
+          console.log(item);
           modal.hide();
           let total = 0;
           for (let i = 0; i < localStorageObject.length; i++) {
+            console.log(item.parentElement.parentElement.firstChild.textContent);
             if (
               localStorageObject[i].name ===
-              item.parentElement.parentElement.firstChild.textContent.slice(2)
+              item.parentElement.parentElement.firstChild.textContent
             ) {
               localStorageObject.splice(i, 1);
               i = i - 1;
@@ -339,7 +362,8 @@ if (localStorageItems && localStorageObject.length > 0) {
     });
   });
 
-  orderBtn.addEventListener("click", () => {
+  orderBtn.addEventListener("click", (e) => {
+    e.preventDefault();
     const cookieValue = document.cookie
       .split("; ")
       .find((row) => row.startsWith("user_id="))
@@ -397,5 +421,8 @@ if (localStorageItems && localStorageObject.length > 0) {
   document.getElementById("container").classList.add("text-center");
   document.getElementById("container").appendChild(emptyCart);
   document.getElementById("container").appendChild(phonePageLink);
-  document.getElementById("address-container").style.display = "none";
+  if (document.cookie) {
+    document.getElementById("address-container").style.display = "none";
+  }
+  
 }
