@@ -120,17 +120,17 @@ router.put("/:id", function (req, res, next) {
   let phone = content.find(phone => phone.id == req.params.id);
 
   if (phone) {
-      phone.name =  req.body.name;
-      phone.brand =  req.body.brand;
-      phone.operating_system =  req.body.operating_system;
-      phone.price =  Number(req.body.price);
-      phone.discount =  Number(req.body.discount);
-      phone.quantity =  Number(req.body.quantity);
-      phone.availability_date =  req.body.availability_date;
-      phone.rating =  Number(req.body.rating);
-      phone.image =  req.body.image;
+    phone.name = req.body.name;
+    phone.brand = req.body.brand;
+    phone.operating_system = req.body.operating_system;
+    phone.price = Number(req.body.price);
+    phone.discount = Number(req.body.discount);
+    phone.quantity = Number(req.body.quantity);
+    phone.availability_date = req.body.availability_date;
+    phone.rating = Number(req.body.rating);
+    phone.image = req.body.image;
 
-    
+
     if (validateProduct(phone)) {
       fs.writeFile('./data/phones.json', JSON.stringify(products), function (err) {
         if (err) {
@@ -152,12 +152,12 @@ router.put("/:id", function (req, res, next) {
 function validateProduct(product) {
   let regexProductName = /(^[A-Za-z0-9]{1,16})([ ]{0,1})([A-Za-z0-9]{1,16})?([ ]{0,1})?([A-Za-z0-9]{1,16})/
   let regexLetters = /^[a-zA-Z]+$/;
-  return req.body.name && 
-    req.body.brand && 
-    req.body.operating_system && 
-    req.body.price && 
-    req.body.quantity && 
-    req.body.availability_date && 
+  return req.body.name &&
+    req.body.brand &&
+    req.body.operating_system &&
+    req.body.price &&
+    req.body.quantity &&
+    req.body.availability_date &&
     req.body.image &&
     product.name.match(regexProductName) &&
     product.name.length >= 1 &&

@@ -5,7 +5,7 @@ const router = express.Router();
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-  axios.get('http://localhost:3001/users')
+  axios.get('${process.env.API_HOST}:${process.env.API_PORT}/users')
     .then(function (response) {
       // handle success
       res.render('users', {
@@ -26,7 +26,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.put('/:id', function (req, res, next) {
-  axios.put(`http://localhost:3001/users/${req.params.id}`, {
+  axios.put(`${process.env.API_HOST}:${process.env.API_PORT}/users/${req.params.id}`, {
     street: req.body.street,
     suite: req.body.suite,
     city: req.body.city,
@@ -50,7 +50,7 @@ router.put('/:id', function (req, res, next) {
 
 router.delete('/:id', function (req, res) {
   res.send(`Deleting user ${req.params.id}`);
-  axios.delete(`http://localhost:3001/users/${req.params.id}`, { data: req.params.id })
+  axios.delete(`${process.env.API_HOST}:${process.env.API_PORT}/users/${req.params.id}`, { data: req.params.id })
     .then(() => console.log('User has been deleted'))
     .catch(() => console.error('Failed to delete user with id ' + req.params.id));
 });

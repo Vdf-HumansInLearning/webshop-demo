@@ -11,7 +11,7 @@ router.get('/login', function(req, res, next) {
 });
 
 router.post('/login', function(req, res, next) {
-  axios.post(`http://localhost:3001/auth/login`, {
+  axios.post(`${process.env.API_HOST}:${process.env.API_PORT}/auth/login`, {
     email : req.body.email,
     password : req.body.password
   },{
@@ -52,7 +52,7 @@ router.get('/register', function(req, res, next) {
   });
   
 router.post('/register', function(req, res, next) {
-    axios.post(`http://localhost:3001/auth/register`, {
+    axios.post(`${process.env.API_HOST}:${process.env.API_PORT}/auth/register`, {
       name: req.body.first_name + " " + req.body.last_name,
       username: req.body.username,
       email: req.body.email,

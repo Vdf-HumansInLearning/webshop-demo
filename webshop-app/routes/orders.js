@@ -3,7 +3,7 @@ const axios = require('axios').default;
 const router = express.Router();
 
 router.get('/', function (req, res, next) {
-  axios.get(`http://localhost:3001/orders/user/${req.cookies.user_id}`)
+  axios.get(`${process.env.API_HOST}:${process.env.API_PORT}/orders/user/${req.cookies.user_id}`)
     .then(function (response) {
 
       let dates = response.data.map(order => new Date(order.date)).map(date => date.getDate()+
@@ -30,7 +30,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.post("/", function (req, res, next) {
-  axios.post('http://localhost:3001/orders', {
+  axios.post('${process.env.API_HOST}:${process.env.API_PORT}/orders', {
     data: req.body
   }, {
     "headers": {
