@@ -5,7 +5,7 @@ const router = express.Router();
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-  axios.get('${process.env.API_HOST}:${process.env.API_PORT}/users')
+  axios.get(`${process.env.API_HOST}:${process.env.API_PORT}/users`)
     .then(function (response) {
       // handle success
       res.render('users', {

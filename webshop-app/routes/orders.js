@@ -6,13 +6,13 @@ router.get('/', function (req, res, next) {
   axios.get(`${process.env.API_HOST}:${process.env.API_PORT}/orders/user/${req.cookies.user_id}`)
     .then(function (response) {
 
-      let dates = response.data.map(order => new Date(order.date)).map(date => date.getDate()+
-      "/"+(date.getMonth()+1)+
-      "/"+date.getFullYear()+
-      " "+date.getHours()+
-      ":"+date.getMinutes()+
-      ":"+date.getSeconds());
-      
+      let dates = response.data.map(order => new Date(order.date)).map(date => date.getDate() +
+        "/" + (date.getMonth() + 1) +
+        "/" + date.getFullYear() +
+        " " + date.getHours() +
+        ":" + date.getMinutes() +
+        ":" + date.getSeconds());
+
       res.render('orders', {
         title: 'Webstore - Order History',
         css: 'stylesheets/orders-style.css',
@@ -30,7 +30,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.post("/", function (req, res, next) {
-  axios.post('${process.env.API_HOST}:${process.env.API_PORT}/orders', {
+  axios.post(`${process.env.API_HOST}:${process.env.API_PORT}/orders`, {
     data: req.body
   }, {
     "headers": {

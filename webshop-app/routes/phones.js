@@ -30,8 +30,7 @@ router.get("/", function (req, res, next) {
 
 router.post("/", function (req, res, next) {
   axios
-    .post(
-      `${process.env.API_HOST}:${process.env.API_PORT}/phones`,
+    .post(`${process.env.API_HOST}:${process.env.API_PORT}/phones`,
       {
         name: req.body.name,
         brand: req.body.brand,
@@ -89,7 +88,7 @@ router.get("/:phone", function (req, res, next) {
         admin: res.locals.admin,
         logged_in: res.locals.loggedIn,
         user: res.locals.user,
-        breadcrumbs: [{ link: "/", name: "Home" }, { link: "/phones", name: "Phones"}, { name: phone.name}],
+        breadcrumbs: [{ link: "/", name: "Home" }, { link: "/phones", name: "Phones" }, { name: phone.name }],
       });
     })
     .catch(function (error) {
@@ -100,8 +99,7 @@ router.get("/:phone", function (req, res, next) {
 
 router.put("/:id", function (req, res, next) {
   axios
-    .put(
-      `${process.env.API_HOST}:${process.env.API_PORT}/phones/${req.params.id}`,
+    .put(`${process.env.API_HOST}:${process.env.API_PORT}/phones/${req.params.id}`,
       {
         name: req.body.name,
         brand: req.body.brand,
