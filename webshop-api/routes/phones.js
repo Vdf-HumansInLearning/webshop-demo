@@ -115,10 +115,8 @@ router.delete('/:id', function (req, res) {
 // update
 router.put("/:id", function (req, res, next) {
   let products = JSON.parse(fs.readFileSync('./data/phones.json', 'utf8'));
-  // let contentIds = content.map(element => element.id);
-  // let index = contentIds.indexOf(Number(req.params.id));
   let phone = content.find(phone => phone.id == req.params.id);
-
+  console.log(req.params.id);
   if (phone) {
     phone.name = req.body.name;
     phone.brand = req.body.brand;

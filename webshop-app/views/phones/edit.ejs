@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../partials/_head'); %>
+<body>
+    <%- include('../partials/_nav'); %>
+    <div class="container d-flex justify-content-center flex-column align-items-center m-5 pt-5" id="container">  
+    <% if(admin){ %>
+        <div class="invalid bg-danger mt-3 d-none" id="invalid-edit">
+            <p class="text-white p-2 m-0">An error occured!</p>
+        </div>
+        <div id="edit-phone-container" class ="edit-phone d-flex justify-content-center flex-column align-items-center text-left">
+            <form class="edit-phone-form" id="edit-phone-form" action="/phones/<%= phone.id %>/edit">
+                <h3 class="text-center mb-3"><u>Edit product</u></h3>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" for="edit-brand" id="basic-addon1">Brand*</span>
+                    <input id="edit-brand" name="brand" value="<%= phone.brand %>" type="text" class="form-control" placeholder="ex. : Samsung" aria-label="ex. : Samsung" aria-describedby="basic-addon1" required>
+                </div>
+                <div class="invalid-feedback mb-2" id="invalid-brand-edit">
+                    Invalid product brand.
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" for="edit-name" id="basic-addon1">Name*</span>
+                    <input id="edit-name" name="name" value="<%= phone.name %>" type="text" class="form-control" placeholder="ex. : Galaxy S21" aria-label="ex. : Galaxy S21" aria-describedby="basic-addon1" required>
+                </div>
+                <div class="invalid-feedback mb-2" id="invalid-name-edit">
+                    Invalid product name.
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" for="edit-os" id="basic-addon1">OS*</span>
+                    <input id="edit-os" name="os" value="<%= phone.operating_system %>" type="text" class="form-control" placeholder="ex. : Android, iOS" aria-label="ex. : Android, iOS" aria-describedby="basic-addon1" required>
+                </div>
+                <div class="invalid-feedback mb-2" id="invalid-os-edit">
+                    Invalid product operating system.
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" for="edit-price" id="basic-addon1">Price*</span>
+                    <input id="edit-price" name="price" value="<%= phone.price %>" type="text" class="form-control" placeholder="ex. : 899" aria-label="ex. : 899" aria-describedby="basic-addon1" required>
+                </div>
+                <div class="invalid-feedback mb-2" id="invalid-price-edit">
+                    Invalid price format.
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" for="edit-discount" id="basic-addon1">Discount</span>
+                    <input id="edit-discount" name="discount" value="<%= phone.discount %>" type="text" class="form-control" placeholder="ex. : 250" aria-label="ex. : 250" aria-describedby="basic-addon1">
+                </div>
+                <div class="invalid-feedback mb-2" id="invalid-discount-edit">
+                    Invalid discount format.
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" for="edit-quantity" id="basic-addon1">Quantity*</span>
+                    <input id="edit-quantity" name="quantity" value="<%= phone.quantity %>" type="text" class="form-control" placeholder="ex. : 100" aria-label="ex. : 100" aria-describedby="basic-addon1" required>
+                </div>
+                <div class="invalid-feedback mb-2" id="invalid-quantity-edit">
+                    Invalid quantity format.
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" for="edit-date" id="basic-addon1">Availability date*</span>
+                    <input id="edit-date" type="text" value="<%= phone.availability_date %>" name="date" class="form-control" placeholder="ex. : 2021-08-13" aria-label="ex. : 2021-08-13" aria-describedby="basic-addon1" required>
+                </div>
+                <div class="invalid-feedback mb-2" id="invalid-date-edit">
+                    Invalid date format.
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" for="edit-rating" id="basic-addon1">Rating</span>
+                    <input id="edit-rating" name="rating" value="<%= phone.rating %>" type="text" class="form-control" placeholder="ex. : 4.5" aria-label="ex. : 4.5" aria-describedby="basic-addon1">
+                </div>
+                <div class="invalid-feedback mb-2" id="invalid-rating-edit">
+                    Invalid rating format.
+                </div>
+                <div class="edit-phone-buttons d-flex justify-content-between">
+                    <button type="submit" id="edit-phone" class="btn btn-danger text-center">Save changes</button>
+                    <a href="/phones"><button type="button" id="cancel-edit" class="btn btn-dark text-center">Cancel</button></a>
+                </div>
+                
+            </form>
+        </div>
+        
+        <div class="modal" id="phone-updated" role="dialog">
+            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title">Successfully updated!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+            </div>
+        </div>
+    <% } else {%>
+        <div class="text-center mt-5">
+            <h3>You're not allowed on this page</h3>
+            <a href="/">Go back to Home page</a>
+        </div>
+    <% } %>
+    </div>
+    <%- include('../partials/_footer'); %>
+    <%- include('../partials/_scripts'); %>
+    <script src="js/phones/edit.js"></script>
+</body>
+</html>

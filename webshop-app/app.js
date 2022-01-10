@@ -29,7 +29,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 // get user middleware that runs before each request
 const getUser = function (req, res, next) {
     if (!(req.url.startsWith('/stylesheets') ||
-        req.url.startsWith('/javascripts') ||
+        req.url.startsWith('/js') ||
         req.url.startsWith('/favicon'))) {
 
         // express requires the use of res.locals object for passing custom data 

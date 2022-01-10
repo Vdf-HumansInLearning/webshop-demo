@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('./partials/_head'); %>
+    <%- include('../partials/_head'); %>
 <body>
-    <%- include('./partials/_nav'); %>
+    <%- include('../partials/_nav'); %>
     <div class="container pt-5" id="container">
-        <%- include('./partials/_breadcrumbs'); %>
+        <%- include('../partials/_breadcrumbs'); %>
         <div class="title mt-3">
         <h4 class="title" id="brand"><%= phone.brand %> <span class="subtitle text-danger" id="name"><%= phone.name %></span></h4>
         </div>
@@ -54,9 +54,9 @@
             </div>
         </div>
     </div>
-    <%- include('./partials/_footer'); %>
+    <%- include('../partials/_footer'); %>
 
-    <%- include('./partials/_scripts'); %>
-    <script src="javascripts/details.js"></script>
+    <%- include('../partials/_scripts'); %>
+    <script src="js/phones/details.js"></script>
 </body>
 </html>

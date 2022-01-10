@@ -3,7 +3,7 @@ const router = express.Router();
 
 router.get('/', function (req, res, next) {
 
-  res.render('profile', {
+  res.render('profile/profile', {
     title: 'Webstore - Profile',
     css: 'stylesheets/profile-style.css',
     navHtml: '',
@@ -15,7 +15,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/edit', function (req, res, next) {
-  res.render('edit_profile', {
+  res.render('profile/edit', {
     title: 'Edit Profile',
     css: 'stylesheets/profile-style.css',
     navHtml: '',

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('./partials/_head'); %>
+    <%- include('../partials/_head'); %>
 <body>
-    <%- include('./partials/_nav'); %>
-    <div class="container d-flex justify-content-center flex-column align-items-center mt-5 pt-5" id="container">
+    <%- include('../partials/_nav'); %>
+    <div class="container d-flex justify-content-center flex-column align-items-center m-5 pt-5" id="container">
         <% if(logged_in === false){ %>
             <h3 class="main-title">You are not logged in.</h3>
             <a href="/auth/login">Go to Login page</a>
@@ -77,8 +77,8 @@
 
     </div>
 
-    <%- include('./partials/_footer'); %>
-    <%- include('./partials/_scripts'); %>
-    <script src="javascripts/profile.js"></script>
+    <%- include('../partials/_footer'); %>
+    <%- include('../partials/_scripts'); %>
+    <script src="js/profile.js"></script>
 </body>
 </html>
