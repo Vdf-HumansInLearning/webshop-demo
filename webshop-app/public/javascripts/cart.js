@@ -371,7 +371,7 @@ if (cartItems && cartItems.length > 0) {
       document.getElementById("order-total").lastChild.textContent.slice(0, -4)
     );
 
-    fetch("http://localhost:3000/orders", {
+    fetch(window.location.origin + "/orders", {
       method: "post",
       headers: {
         "Content-Type": "application/json",

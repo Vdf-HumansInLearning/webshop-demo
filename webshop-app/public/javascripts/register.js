@@ -38,7 +38,7 @@ if (form) {
 
     var myModalEl = document.getElementById('register-success')
     myModalEl.addEventListener('hide.bs.modal', function (event) {
-        window.location.href = "http://localhost:3000/auth/login";
+        window.location.href = window.location.origin + "/auth/login";
     });
 
     // Get the input box

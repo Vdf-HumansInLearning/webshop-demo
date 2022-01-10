@@ -96,7 +96,7 @@ if (form) {
                     }
                 })
             document.getElementById('user-updated').addEventListener('hide.bs.modal', function (event) {
-                window.location.href = "http://localhost:3000/profile";
+                window.location.href = window.location.origin + "/profile";
             });
         } else {
             let regexLetters = /(^[A-Za-z]{2,30})([ ]{0,1})([A-Za-z]{2,30})/;

@@ -1,1 +1,152 @@
-[{"id":1,"name":"Leanne Graham","username":"Bret","email":"Sincere@april.biz","password":"test1","role":"admin","address":{"street":"Kulas Light","suite":"Apt. 556","city":"Gwenborough","zipcode":"929985"},"phone":"1-770-736-803"},{"id":2,"name":"Ervin Howell","username":"Antonette","email":"Shanna@melissa.tv","password":"test2","role":"user","address":{"street":"Victor Plains","suite":"Suite 879","city":"Wisokyburgh","zipcode":"90566-7771"},"phone":"010-692-6593 x09125"},{"id":3,"name":"Clementine Bauch","username":"Samantha","email":"Nathan@yesenia.net","password":"test3","role":"user","address":{"street":"Douglas Extension","suite":"Suite 847","city":"McKenziehaven","zipcode":"59590-4157"},"phone":"1-463-123-4447"},{"id":4,"name":"Patricia Lebsack","username":"Karianne","email":"Julianne.OConner@kory.org","password":"test4","role":"user","address":{"street":"Hoeger Mall","suite":"Apt. 692","city":"South Elvis","zipcode":"53919-4257"},"phone":"493-170-9623 x156"},{"id":6,"name":"Mrs. Dennis Schulist","username":"Leopoldo_Corkery","email":"Karley_Dach@jasper.info","password":"test6","role":"user","address":{"street":"Norberto Crossing","suite":"Apt. 950","city":"South Christy","zipcode":"23505-1337"},"phone":"1-477-935-8478 x6430"},{"id":7,"name":"Kurtis Weissnat","username":"Elwyn.Skiles","email":"Telly.Hoeger@billy.biz","password":"test7","role":"user","address":{"street":"Rex Trail","suite":"Suite 280","city":"Howemouth","zipcode":"58804-1099"},"phone":"210.067.6132"},{"id":8,"name":"Nicholas Runolfsdottir V","username":"Maxime_Nienow","email":"Sherwood@rosamond.me","password":"test8","role":"user","address":{"street":"Ellsworth Summit","suite":"Suite 729","city":"Aliyaview","zipcode":"45169"},"phone":"586.493.6943 x140"},{"id":9,"name":"Glenna Reichert","username":"Delphine","email":"Chaim_McDermott@dana.io","password":"test9","role":"user","address":{"street":"Dayna Park","suite":"Suite 449","city":"Bartholomebury","zipcode":"76495-3109"},"phone":"(775)976-6794 x41206"},{"id":10,"name":"Clementina DuBuque","username":"Moriah.Stanton","email":"Rey.Padberg@karina.biz","password":"test10","role":"user","address":{"street":"Kattie Turnpike","suite":"Suite 198","city":"Lebsackbury","zipcode":"314256"},"phone":"024-648-3804"},{"id":11,"name":"test test","username":"test","email":"test@test.com","password":"Pass1234#","role":"user","address":{"street":"Street","suite":"bl.2, scara 1","city":"Bucuresti","zipcode":"000000"},"phone":"0723232325"}]
+[
+    {
+        "id": 1,
+        "name": "Leanne Graham",
+        "username": "Bret",
+        "email": "Sincere@april.biz",
+        "password": "test1",
+        "role": "admin",
+        "address": {
+            "street": "Kulas Light",
+            "suite": "Apt. 556",
+            "city": "Gwenborough",
+            "zipcode": "929985"
+        },
+        "phone": "1-770-736-803"
+    },
+    {
+        "id": 2,
+        "name": "Ervin Howell",
+        "username": "Antonette",
+        "email": "Shanna@melissa.tv",
+        "password": "test2",
+        "role": "user",
+        "address": {
+            "street": "Victor Plains",
+            "suite": "Suite 879",
+            "city": "Wisokyburgh",
+            "zipcode": "90566-7771"
+        },
+        "phone": "010-692-6593 x09125"
+    },
+    {
+        "id": 3,
+        "name": "Clementine Bauch",
+        "username": "Samantha",
+        "email": "Nathan@yesenia.net",
+        "password": "test3",
+        "role": "user",
+        "address": {
+            "street": "Douglas Extension",
+            "suite": "Suite 847",
+            "city": "McKenziehaven",
+            "zipcode": "59590-4157"
+        },
+        "phone": "1-463-123-4447"
+    },
+    {
+        "id": 4,
+        "name": "Patricia Lebsack",
+        "username": "Karianne",
+        "email": "Julianne.OConner@kory.org",
+        "password": "test4",
+        "role": "user",
+        "address": {
+            "street": "Hoeger Mall",
+            "suite": "Apt. 692",
+            "city": "South Elvis",
+            "zipcode": "53919-4257"
+        },
+        "phone": "493-170-9623 x156"
+    },
+    {
+        "id": 6,
+        "name": "Mrs. Dennis Schulist",
+        "username": "Leopoldo_Corkery",
+        "email": "Karley_Dach@jasper.info",
+        "password": "test6",
+        "role": "user",
+        "address": {
+            "street": "Norberto Crossing",
+            "suite": "Apt. 950",
+            "city": "South Christy",
+            "zipcode": "23505-1337"
+        },
+        "phone": "1-477-935-8478 x6430"
+    },
+    {
+        "id": 7,
+        "name": "Kurtis Weissnat",
+        "username": "Elwyn.Skiles",
+        "email": "Telly.Hoeger@billy.biz",
+        "password": "test7",
+        "role": "user",
+        "address": {
+            "street": "Rex Trail",
+            "suite": "Suite 280",
+            "city": "Howemouth",
+            "zipcode": "58804-1099"
+        },
+        "phone": "210.067.6132"
+    },
+    {
+        "id": 8,
+        "name": "Nicholas Runolfsdottir V",
+        "username": "Maxime_Nienow",
+        "email": "Sherwood@rosamond.me",
+        "password": "test8",
+        "role": "user",
+        "address": {
+            "street": "Ellsworth Summit",
+            "suite": "Suite 729",
+            "city": "Aliyaview",
+            "zipcode": "45169"
+        },
+        "phone": "586.493.6943 x140"
+    },
+    {
+        "id": 9,
+        "name": "Glenna Reichert",
+        "username": "Delphine",
+        "email": "Chaim_McDermott@dana.io",
+        "password": "test9",
+        "role": "user",
+        "address": {
+            "street": "Dayna Park",
+            "suite": "Suite 449",
+            "city": "Bartholomebury",
+            "zipcode": "76495-3109"
+        },
+        "phone": "(775)976-6794 x41206"
+    },
+    {
+        "id": 10,
+        "name": "Clementina DuBuque",
+        "username": "Moriah.Stanton",
+        "email": "Rey.Padberg@karina.biz",
+        "password": "test10",
+        "role": "user",
+        "address": {
+            "street": "Kattie Turnpike",
+            "suite": "Suite 198",
+            "city": "Lebsackbury",
+            "zipcode": "314256"
+        },
+        "phone": "024-648-3804"
+    },
+    {
+        "id": 11,
+        "name": "test test",
+        "username": "test",
+        "email": "test@test.com",
+        "password": "Pass1234#",
+        "role": "user",
+        "address": {
+            "street": "Street",
+            "suite": "bl.2, scara 1",
+            "city": "Bucuresti",
+            "zipcode": "000000"
+        },
+        "phone": "0723232325"
+    }
+]

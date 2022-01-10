@@ -39,11 +39,11 @@ form.addEventListener("submit", function (event) {
 document.getElementById("search-input").addEventListener('blur', function () {
     let url = new URL(location.href);
     if (document.getElementById("search-input").value !== "") {
-        if ("http://localhost:3000/phones" === window.location.href) {
+        if (window.location.origin + "/phones" === window.location.href) {
             window.location.href += "?search=" + document.getElementById("search-input").value;
         } else {
             url.searchParams.delete('search');
-            if ("http://localhost:3000/phones" === url.href) {
+            if (window.location.origin + "/phones" === url.href) {
                 window.location.href += "?search=" + document.getElementById("search-input").value;
             } else {
                 window.location.href += "&search=" + document.getElementById("search-input").value;
@@ -59,11 +59,11 @@ document.getElementById("search-input").addEventListener('blur', function () {
 document.getElementById("sort").addEventListener('change', function () {
     let url = new URL(location.href);
     if (document.getElementById("sort").value !== "none") {
-        if ("http://localhost:3000/phones" === window.location.href) {
+        if (window.location.origin + "/phones" === window.location.href) {
             window.location.href += "?sort=" + document.getElementById("sort").value;
         } else {
             url.searchParams.delete('sort');
-            if ("http://localhost:3000/phones" === url.href) {
+            if (window.location.origin + "/phones" === url.href) {
                 window.location.href = url.href + "?sort=" + document.getElementById("sort").value;
             } else {
                 window.location.href = url.href + "&sort=" + document.getElementById("sort").value;
@@ -87,7 +87,7 @@ document.getElementById('toggle-filters').addEventListener('click', function () 
 
 // reset the filters in the form
 document.getElementById('reset').addEventListener('click', function () {
-    let url = "http://localhost:3000/phones";
+    let url = window.location.origin + "/phones";
     let count = 1;
     if (document.getElementById("search-input").value !== "") {
         url += "?search=" + document.getElementById("search-input").value;
@@ -499,7 +499,7 @@ if (editBtn.length > 0) {
 
     editBtn.forEach(item => {
         item.addEventListener('click', () => {
-            fetch(`http://localhost:3001/phones/${item.parentElement.id}`)
+            fetch(`${window.location.origin}/phones/${item.parentElement.id}`)
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById("edit-phone-form").setAttribute("action", `/phones/${data.id}`);
