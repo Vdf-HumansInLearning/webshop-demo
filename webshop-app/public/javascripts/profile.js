@@ -1,5 +1,5 @@
 let localStorageItems = localStorage.getItem('items');
-if(localStorageItems){
+if (localStorageItems) {
     let localStorageObject = JSON.parse(localStorageItems);
     document.getElementById("cart-items").textContent = localStorageObject.length;
 }
@@ -7,11 +7,11 @@ if(localStorageItems){
 
 // actions for EDIT phone
 let form = document.getElementById("edit-user-form")
-if(form) {
+if (form) {
     let updateModal = new bootstrap.Modal(document.getElementById("user-updated"), {});
 
     document.querySelectorAll("#edit-user-form .input-group .form-control").forEach(item => {
-        item.addEventListener("blur", function() {
+        item.addEventListener("blur", function () {
             let street = document.getElementById("edit-street").value;
             let suite = document.getElementById("edit-suite").value;
             let city = document.getElementById("edit-city").value;
@@ -22,40 +22,40 @@ if(form) {
             let regexZipCode = /(\d{6})/;
             let regexAddressSuite = /^[.0-9a-zA-Z\s,-]+$/;
 
-            if(item.id === "edit-street") {
-                if(street.match(regexLetters)) {
+            if (item.id === "edit-street") {
+                if (street.match(regexLetters)) {
                     document.getElementById("invalid-street-edit").style.display = "none";
                 } else {
                     document.getElementById("invalid-street-edit").style.display = "block";
                 }
             }
 
-            if(item.id === "edit-suite") {
-                if(suite.match(regexAddressSuite) && suite.length >= 1 && suite.length <= 30) {
+            if (item.id === "edit-suite") {
+                if (suite.match(regexAddressSuite) && suite.length >= 1 && suite.length <= 30) {
                     document.getElementById("invalid-suite-edit").style.display = "none";
                 } else {
                     document.getElementById("invalid-suite-edit").style.display = "block";
                 }
             }
 
-            if(item.id === "edit-city") {
-                if(city.match(regexLetters)) {
+            if (item.id === "edit-city") {
+                if (city.match(regexLetters)) {
                     document.getElementById("invalid-city-edit").style.display = "none";
                 } else {
                     document.getElementById("invalid-city-edit").style.display = "block";
                 }
             }
 
-            if(item.id === "edit-zip") {
-                if(zip.match(regexZipCode)) {
+            if (item.id === "edit-zip") {
+                if (zip.match(regexZipCode)) {
                     document.getElementById("invalid-zip-edit").style.display = "none";
                 } else {
                     document.getElementById("invalid-zip-edit").style.display = "block";
                 }
             }
 
-            if(item.id === "edit-phone") {
-                if(phone.match(regexPhone)) {
+            if (item.id === "edit-phone") {
+                if (phone.match(regexPhone)) {
                     document.getElementById("invalid-phone-edit").style.display = "none";
                 } else {
                     document.getElementById("invalid-phone-edit").style.display = "block";
@@ -64,7 +64,7 @@ if(form) {
         })
     })
 
-    document.getElementById("edit-user-form").addEventListener("submit",function(e) {
+    document.getElementById("edit-user-form").addEventListener("submit", function (e) {
         e.preventDefault();
         let street = document.getElementById("edit-street").value;
         let suite = document.getElementById("edit-suite").value;
@@ -79,22 +79,22 @@ if(form) {
             "zipcode": zip,
             "phone": phone
         };
-        if(validateUser(updatedUser)){
+        if (validateUser(updatedUser)) {
 
-            fetch(document.getElementById("edit-user-form").action,{
+            fetch(document.getElementById("edit-user-form").action, {
                 method: 'put',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ street : street, suite : suite, city : city, zipcode : zip, phone : phone})
+                body: JSON.stringify({ street: street, suite: suite, city: city, zipcode: zip, phone: phone })
             })
-            .then(data => {
-                if(data.status === 200){
-                    setTimeout(() => {updateModal.show()}, 2000);
-                } else {
-                    document.getElementById("invalid-edit").classList.remove("d-none");
-                }
-            })
+                .then(data => {
+                    if (data.status === 200) {
+                        setTimeout(() => { updateModal.show() }, 2000);
+                    } else {
+                        document.getElementById("invalid-edit").classList.remove("d-none");
+                    }
+                })
             document.getElementById('user-updated').addEventListener('hide.bs.modal', function (event) {
                 window.location.href = "http://localhost:3000/profile";
             });
@@ -103,33 +103,33 @@ if(form) {
             let regexPhone = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/g;
             let regexZipCode = /^[0-9]{6}$/;
             let regexAddressSuite = /^[.0-9a-zA-Z\s,-]+$/;
-            if(street.match(regexLetters)) {
+            if (street.match(regexLetters)) {
                 document.getElementById("invalid-street-edit").style.display = "none";
             } else {
                 document.getElementById("invalid-street-edit").style.display = "block";
             }
-            if(suite.match(regexAddressSuite) && suite.length >= 1 && suite.length <= 30) {
+            if (suite.match(regexAddressSuite) && suite.length >= 1 && suite.length <= 30) {
                 document.getElementById("invalid-suite-edit").style.display = "none";
             } else {
                 document.getElementById("invalid-suite-edit").style.display = "block";
             }
-            if(city.match(regexLetters)) {
+            if (city.match(regexLetters)) {
                 document.getElementById("invalid-city-edit").style.display = "none";
             } else {
                 document.getElementById("invalid-city-edit").style.display = "block";
             }
-            if(zip.match(regexZipCode)) {
+            if (zip.match(regexZipCode)) {
                 document.getElementById("invalid-zip-edit").style.display = "none";
             } else {
                 document.getElementById("invalid-zip-edit").style.display = "block";
             }
-            if(phone.match(regexPhone)) {
+            if (phone.match(regexPhone)) {
                 document.getElementById("invalid-phone-edit").style.display = "none";
             } else {
                 document.getElementById("invalid-phone-edit").style.display = "block";
             }
         }
-        
+
 
     });
 }
@@ -139,17 +139,17 @@ function validateUser(user) {
     let regexPhone = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/g;
     let regexZipCode = /^[0-9]{6}$/;
     let regexAddressSuite = /^[.0-9a-zA-Z\s,-]+$/;
-  
+
     return (
-      user.street &&
-      user.suite &&
-      user.city &&
-      user.zipcode &&
-      user.phone &&
-      user.street.match(regexLetters) &&
-      user.city.match(regexLetters) &&
-      user.suite.match(regexAddressSuite) &&
-      user.zipcode.match(regexZipCode) &&
-      user.phone.match(regexPhone)
+        user.street &&
+        user.suite &&
+        user.city &&
+        user.zipcode &&
+        user.phone &&
+        user.street.match(regexLetters) &&
+        user.city.match(regexLetters) &&
+        user.suite.match(regexAddressSuite) &&
+        user.zipcode.match(regexZipCode) &&
+        user.phone.match(regexPhone)
     );
-  }
+}

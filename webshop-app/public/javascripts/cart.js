@@ -1,5 +1,4 @@
-let localStorageItems = localStorage.getItem("items");
-let localStorageObject = JSON.parse(localStorageItems);
+let cartItems = JSON.parse(localStorage.getItem("items"));
 let deliveryFormControls = [];
 let billingFormControls = [];
 let deliveryStreet = "";
@@ -11,12 +10,12 @@ let billingCity = "";
 let billingSuite = "";
 let billingZipcode = "";
 
-if (localStorageItems && localStorageObject.length > 0) {
-  document.getElementById("cart-items").textContent = localStorageObject.length;
+if (cartItems && cartItems.length > 0) {
+  document.getElementById("cart-items").textContent = cartItems.length;
   let orderTitleDiv = document.createElement('div');
-  orderTitleDiv.setAttribute('class','section-title');
+  orderTitleDiv.setAttribute('class', 'section-title');
   let sectionNumber = document.createElement('span');
-  sectionNumber.setAttribute('class','section-number');
+  sectionNumber.setAttribute('class', 'section-number');
   sectionNumber.textContent = "1";
   let orderTitleH3 = document.createElement('h3');
   orderTitleH3.textContent = "Order Summary";
@@ -29,12 +28,12 @@ if (localStorageItems && localStorageObject.length > 0) {
   orderDiv.setAttribute("id", "order");
   document.getElementById("container").appendChild(orderDiv);
   let totalPrice = 0;
-  for (let i = 0; i < localStorageObject.length; i++) {
+  for (let i = 0; i < cartItems.length; i++) {
     let itemDiv = document.createElement("div");
     itemDiv.setAttribute("class", "p-2 item-container");
     let h4 = document.createElement("h4");
     h4.setAttribute("class", "item-container-product");
-    h4.textContent = localStorageObject[i].name;
+    h4.textContent = cartItems[i].name;
     let quantityDiv = document.createElement("div");
     quantityDiv.setAttribute("class", "quantity-div");
     let quantityTitle = document.createElement("p");
@@ -44,7 +43,7 @@ if (localStorageItems && localStorageObject.length > 0) {
     let spanMinus = document.createElement("span");
     let buttonMinus = document.createElement("button");
     buttonMinus.setAttribute("class", "quantity-btn minus-btn");
-    if (localStorageObject[i].quantity < 2) {
+    if (cartItems[i].quantity < 2) {
       buttonMinus.disabled = true;
     }
     let iconMinus = document.createElement("i");
@@ -53,11 +52,11 @@ if (localStorageItems && localStorageObject.length > 0) {
     spanMinus.appendChild(buttonMinus);
     let quantity = document.createElement("p");
     quantity.setAttribute("class", "quantity");
-    quantity.textContent = localStorageObject[i].quantity;
+    quantity.textContent = cartItems[i].quantity;
     let spanPlus = document.createElement("span");
     let buttonPlus = document.createElement("button");
     buttonPlus.setAttribute("class", "quantity-btn plus-btn");
-    if (localStorageObject[i].quantity > 4) {
+    if (cartItems[i].quantity > 4) {
       buttonPlus.disabled = true;
     }
     let iconPlus = document.createElement("i");
@@ -78,11 +77,11 @@ if (localStorageItems && localStorageObject.length > 0) {
     let price = document.createElement("p");
     price.setAttribute("class", "price");
     price.textContent =
-      `${localStorageObject[i].quantity} x ${localStorageObject[i].price} = ` +
-      Number(localStorageObject[i].price) * localStorageObject[i].quantity +
+      `${cartItems[i].quantity} x ${cartItems[i].price} = ` +
+      Number(cartItems[i].price) * cartItems[i].quantity +
       " RON";
     totalPrice +=
-      Number(localStorageObject[i].price) * localStorageObject[i].quantity;
+      Number(cartItems[i].price) * cartItems[i].quantity;
     priceDiv.appendChild(priceTitle);
     priceDiv.appendChild(price);
 
@@ -120,21 +119,21 @@ if (localStorageItems && localStorageObject.length > 0) {
   totalDiv.appendChild(totalPriceH4);
   orderDiv.appendChild(totalDiv);
 
-if(document.getElementById("delivery-address") && document.getElementById("billing-address")){
-  deliveryFormControls = document.getElementById("delivery-address").querySelectorAll(".form-control");
-  deliveryStreet = deliveryFormControls[0].value;
-  deliveryCity = deliveryFormControls[1].value;
-  deliverySuite = deliveryFormControls[2].value;
-  deliveryZipcode = deliveryFormControls[3].value;
-  billingFormControls = document.getElementById("billing-address").querySelectorAll(".form-control");
-  billingStreet = billingFormControls[0].value;
-  billingCity = billingFormControls[1].value;
-  billingSuite = billingFormControls[2].value;
-  billingZipcode = billingFormControls[3].value;
+  if (document.getElementById("delivery-address") && document.getElementById("billing-address")) {
+    deliveryFormControls = document.getElementById("delivery-address").querySelectorAll(".form-control");
+    deliveryStreet = deliveryFormControls[0].value;
+    deliveryCity = deliveryFormControls[1].value;
+    deliverySuite = deliveryFormControls[2].value;
+    deliveryZipcode = deliveryFormControls[3].value;
+    billingFormControls = document.getElementById("billing-address").querySelectorAll(".form-control");
+    billingStreet = billingFormControls[0].value;
+    billingCity = billingFormControls[1].value;
+    billingSuite = billingFormControls[2].value;
+    billingZipcode = billingFormControls[3].value;
 
-  handleAddressChange("delivery-address");
-  handleAddressChange("billing-address");
-}
+    handleAddressChange("delivery-address");
+    handleAddressChange("billing-address");
+  }
   function handleAddressChange(id) {
     let dropdown = document.getElementById(id + "-dropdown");
     let formControls = document
@@ -163,7 +162,7 @@ if(document.getElementById("delivery-address") && document.getElementById("billi
     }
   }
 
-  
+
 
   let orderBtnDiv = document.createElement("div");
   orderBtnDiv.setAttribute("class", "d-flex justify-content-end mt-3");
@@ -190,7 +189,7 @@ if(document.getElementById("delivery-address") && document.getElementById("billi
     orderBtnDiv.appendChild(orderBtn);
     document.getElementById("billing-address").appendChild(orderBtnDiv);
   }
-  
+
 
   let modalDiv = document.createElement("div");
   modalDiv.setAttribute("class", "modal");
@@ -249,41 +248,41 @@ if(document.getElementById("delivery-address") && document.getElementById("billi
         item.parentElement.nextSibling.textContent =
           Number(item.parentElement.nextSibling.textContent) - 1;
         let total = 0;
-        for (let i = 0; i < localStorageObject.length; i++) {
+        for (let i = 0; i < cartItems.length; i++) {
           if (
-            localStorageObject[i].name ===
+            cartItems[i].name ===
             item.parentElement.parentElement.parentElement.parentElement.firstChild.textContent
           ) {
-            console.log(localStorageObject[i].quantity);
-            localStorageObject[i].quantity -= 1;
-            console.log(localStorageObject[i].quantity);
+            console.log(cartItems[i].quantity);
+            cartItems[i].quantity -= 1;
+            console.log(cartItems[i].quantity);
             item.parentElement.parentElement.parentElement.nextSibling.lastChild.textContent =
-              `${localStorageObject[i].quantity} x ${localStorageObject[i].price} = ` +
-              Number(localStorageObject[i].price) *
-                localStorageObject[i].quantity +
+              `${cartItems[i].quantity} x ${cartItems[i].price} = ` +
+              Number(cartItems[i].price) *
+              cartItems[i].quantity +
               " RON";
-            if (localStorageObject[i].quantity < 5) {
+            if (cartItems[i].quantity < 5) {
               item.parentElement.nextSibling.nextSibling.firstChild.disabled = false;
             }
-            if (localStorageObject[i].quantity < 2) {
+            if (cartItems[i].quantity < 2) {
               item.disabled = true;
             }
           }
-          if (localStorageObject[i].quantity === 0) {
-            localStorageObject.splice(i, 1);
+          if (cartItems[i].quantity === 0) {
+            cartItems.splice(i, 1);
             i = i - 1;
-            localStorage.setItem("items", JSON.stringify(localStorageObject));
+            localStorage.setItem("items", JSON.stringify(cartItems));
             item.parentElement.parentElement.parentElement.parentElement.remove();
             document.getElementById("cart-items").textContent =
-              localStorageObject.length;
+              cartItems.length;
           } else {
-            localStorage.setItem("items", JSON.stringify(localStorageObject));
+            localStorage.setItem("items", JSON.stringify(cartItems));
             total +=
-              Number(localStorageObject[i].price) *
-              localStorageObject[i].quantity;
+              Number(cartItems[i].price) *
+              cartItems[i].quantity;
           }
         }
-        if (localStorageObject.length > 0) {
+        if (cartItems.length > 0) {
           totalPriceH4.textContent = total + " RON";
         } else {
           window.location.reload();
@@ -296,27 +295,27 @@ if(document.getElementById("delivery-address") && document.getElementById("billi
       item.parentElement.previousSibling.textContent =
         Number(item.parentElement.previousSibling.textContent) + 1;
       let total = 0;
-      for (let i = 0; i < localStorageObject.length; i++) {
+      for (let i = 0; i < cartItems.length; i++) {
         if (
-          localStorageObject[i].name ===
+          cartItems[i].name ===
           item.parentElement.parentElement.parentElement.parentElement.firstChild.textContent
         ) {
-          localStorageObject[i].quantity += 1;
+          cartItems[i].quantity += 1;
           item.parentElement.parentElement.parentElement.nextSibling.lastChild.textContent =
-            `${localStorageObject[i].quantity} x ${localStorageObject[i].price} = ` +
-            Number(localStorageObject[i].price) *
-              localStorageObject[i].quantity +
+            `${cartItems[i].quantity} x ${cartItems[i].price} = ` +
+            Number(cartItems[i].price) *
+            cartItems[i].quantity +
             " RON";
-          if (localStorageObject[i].quantity > 4) {
+          if (cartItems[i].quantity > 4) {
             item.disabled = true;
           }
-          if (localStorageObject[i].quantity > 1) {
+          if (cartItems[i].quantity > 1) {
             item.parentElement.parentElement.firstChild.firstChild.disabled = false;
           }
         }
-        localStorage.setItem("items", JSON.stringify(localStorageObject));
+        localStorage.setItem("items", JSON.stringify(cartItems));
         total +=
-          Number(localStorageObject[i].price) * localStorageObject[i].quantity;
+          Number(cartItems[i].price) * cartItems[i].quantity;
       }
       totalPriceH4.textContent = total + " RON";
     });
@@ -335,25 +334,25 @@ if(document.getElementById("delivery-address") && document.getElementById("billi
           console.log(item);
           modal.hide();
           let total = 0;
-          for (let i = 0; i < localStorageObject.length; i++) {
+          for (let i = 0; i < cartItems.length; i++) {
             console.log(item.parentElement.parentElement.firstChild.textContent);
             if (
-              localStorageObject[i].name ===
+              cartItems[i].name ===
               item.parentElement.parentElement.firstChild.textContent
             ) {
-              localStorageObject.splice(i, 1);
+              cartItems.splice(i, 1);
               i = i - 1;
-              localStorage.setItem("items", JSON.stringify(localStorageObject));
+              localStorage.setItem("items", JSON.stringify(cartItems));
               item.parentElement.parentElement.remove();
               document.getElementById("cart-items").textContent =
-                localStorageObject.length;
+                cartItems.length;
             } else {
               total +=
-                Number(localStorageObject[i].price) *
-                localStorageObject[i].quantity;
+                Number(cartItems[i].price) *
+                cartItems[i].quantity;
             }
           }
-          if (localStorageObject.length > 0) {
+          if (cartItems.length > 0) {
             totalPriceH4.textContent = total + " RON";
           } else {
             window.location.reload();
@@ -378,7 +377,7 @@ if(document.getElementById("delivery-address") && document.getElementById("billi
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        items: localStorageObject,
+        items: cartItems,
         total: orderTotal,
         user: cookieValue,
         delivery_address: {
@@ -424,5 +423,5 @@ if(document.getElementById("delivery-address") && document.getElementById("billi
   if (document.cookie) {
     document.getElementById("address-container").style.display = "none";
   }
-  
+
 }
