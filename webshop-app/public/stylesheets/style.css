@@ -81,3 +81,12 @@
         left: -100px;
     }
 }
+
+@media (max-width: 600px){
+    .footer{
+        flex-direction: column;
+    }
+    .footer-list{
+        padding-left: 0;
+    }
+}
