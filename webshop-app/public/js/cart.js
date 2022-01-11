@@ -401,8 +401,8 @@ if (cartItems && cartItems.length > 0) {
         localStorage.removeItem("items");
         let myModalEl = document.getElementById("order-success");
         let myModal = new bootstrap.Modal(myModalEl,{});
-        myModalEl.addEventListener("hide.bs.modal", () => window.location = window.location.origin + "/phones");
-        myModal.show();
+        myModalEl.addEventListener("hide.bs.modal", () => window.location.reload());
+        setTimeout(() => { myModal.show() }, 2000);
       } else {
         document.getElementById("invalid-order").classList.remove("d-none");
       }

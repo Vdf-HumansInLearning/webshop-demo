@@ -85,6 +85,11 @@ document.getElementById('toggle-filters').addEventListener('click', function () 
     }
 });
 
+// hide the filter form
+document.getElementById('close-form').addEventListener('click', function () {
+    document.getElementById('filter-form').classList.add('hide-form');
+});
+
 // reset the filters in the form
 document.getElementById('reset').addEventListener('click', function () {
     let url = window.location.origin + "/phones";
@@ -131,6 +136,9 @@ addCartBtn.forEach(item => {
             localStorage.setItem("items", JSON.stringify(items));
             document.getElementById("cart-items").textContent = Number(document.getElementById("cart-items").textContent) + 1;
         }
+        let liveToast = document.getElementById("liveToast");
+        let toast = new bootstrap.Toast(liveToast);
+        toast.show();
     });
 });
 

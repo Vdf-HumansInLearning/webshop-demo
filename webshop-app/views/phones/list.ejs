@@ -35,12 +35,11 @@
                                 </div>
                                 
                                 <div class="filter"> 
-                                    
-                                    
                                     <form action="/phones" id="filter-form" class="hide-form filter-form" method="get">
+                                        <div class="d-flex justify-content-end"><i class="fas fa-window-close fa-2x close-form" id="close-form"></i></div>
                                         <input type="hidden" id="hidden-search" name="search"/>
                                         <input type="hidden" id="hidden-sort" name="sort"/>
-                                        <p class="filter-title mt-3">Filter the phones</p>
+                                        <p class="filter-title">Filter the phones</p>
                                         <fieldset id="filter-brand">
                                             <legend>Brand:</legend>
                                             <% for(let i = 0; i < filters.brand.length; i++) {%>
@@ -56,21 +55,21 @@
                                                     <fieldset id="filter-price" class="mt-2">
                                                         <legend>Price:</legend>
                                                         <% if(selectedFilters.price_range === "0_700"){ %>
-                                                            <input type="radio" name="price_range" id="range_0_700" value="0_700" checked><label>0-700 RON</label>
+                                                            <input type="radio" name="price_range" id="range_0_700" value="0_700" checked><label> 0-700 RON</label>
                                                             <% } else{ %>  
-                                                                <input type="radio" name="price_range" id="range_0_700" value="0_700"><label>0-700 RON</label>
+                                                                <input type="radio" name="price_range" id="range_0_700" value="0_700"><label> 0-700 RON</label>
                                                                 <% } %>
                                                                 <br>
                                                                 <% if(selectedFilters.price_range === "701_4000"){ %>
-                        <input type="radio" name="price_range" id="range_701_4000" value="701_4000" checked><label>701-4000 RON</label>
+                        <input type="radio" name="price_range" id="range_701_4000" value="701_4000" checked><label> 701-4000 RON</label>
                         <% } else{ %>  
-                            <input type="radio" name="price_range" id="range_701_4000" value="701_4000"><label>701-4000 RON</label>
+                            <input type="radio" name="price_range" id="range_701_4000" value="701_4000"><label> 701-4000 RON</label>
                     <% } %>
                     <br>
                     <% if(selectedFilters.price_range === "4001"){ %>
-                        <input type="radio" name="price_range" id="range_4001_" value="4001" checked><label>Above 4000 RON</label>
+                        <input type="radio" name="price_range" id="range_4001_" value="4001" checked><label> Above 4000 RON</label>
                         <% } else{ %>  
-                            <input type="radio" name="price_range" id="range_4001_" value="4001"><label>Above 4000 RON</label>
+                            <input type="radio" name="price_range" id="range_4001_" value="4001"><label> Above 4000 RON</label>
                     <% } %>
 
                 </fieldset>
@@ -172,6 +171,13 @@
         <a href="/phones/add"><button class="btn btn-outline-danger" id="display-add-form">Add new product</button></a>
     </div>
     <% } %>
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="liveToast" class="toast hide bg-danger text-white" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-body">
+            Phone added to cart!
+          </div>
+        </div>
+    </div>
     <%- include('../partials/_footer'); %>
     <%- include('../partials/_scripts'); %>
     <script src="js/phones/phones.js"></script>
