@@ -5,6 +5,7 @@
     <%- include('./partials/_nav'); %>
     <main class="main">
         <% if(admin){ %>
+          <%- include('./partials/_breadcrumbs'); %>
             <ol class="list-group list-group-numbered">
                 <% for(var i = 0; i < users.length; i++) {%>
                     <li class="list-group-item d-flex justify-content-between align-items-start" id="item-<%= users[i].id %>">

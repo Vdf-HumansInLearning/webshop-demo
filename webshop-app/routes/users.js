@@ -15,7 +15,8 @@ router.get('/', function (req, res, next) {
         users: response.data,
         admin: res.locals.admin,
         logged_in: res.locals.loggedIn,
-        user: res.locals.user
+        user: res.locals.user,
+        breadcrumbs: [{ link: "/", name: "Home" }, { name: "Users" }],
       });
     })
     .catch(function (error) {

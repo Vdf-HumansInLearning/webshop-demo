@@ -78,7 +78,8 @@ router.get("/add", function (req, res, next) {
     navHtml: "",
     admin: res.locals.admin,
     logged_in: res.locals.loggedIn,
-    user: res.locals.user
+    user: res.locals.user,
+    breadcrumbs: [{ link: "/", name: "Home" }, { link: "/phones", name: "Phones" }, { name: "Add" }],
   });
 });
 
