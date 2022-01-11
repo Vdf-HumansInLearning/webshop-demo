@@ -94,11 +94,13 @@ router.get("/:id/edit", function (req, res, next) {
         phone: response.data,
         admin: res.locals.admin,
         logged_in: res.locals.loggedIn,
-        user: res.locals.user
+        user: res.locals.user,
+        breadcrumbs: [{ link: "/", name: "Home" }, { link: "/phones", name: "Phones" }, { link: `/phones/${response.data.name}/details`, name: response.data.name }, {name: "Edit"}],
       });
     })
     .catch(function (error) {
       // handle error
+      console.log(error);
       res.status(404).send("404 Not Found");
     });
 });

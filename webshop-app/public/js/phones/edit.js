@@ -105,6 +105,7 @@ document.querySelectorAll("#edit-phone-form .input-group .form-control").forEach
 
 document.getElementById("edit-phone-form").addEventListener("submit", function (e) {
     e.preventDefault();
+    let id = document.getElementById("edit-id").value;
     let brand = document.getElementById("edit-brand").value;
     let name = document.getElementById("edit-name").value;
     let os = document.getElementById("edit-os").value;
@@ -162,7 +163,7 @@ document.getElementById("edit-phone-form").addEventListener("submit", function (
     if (validateProduct(updatedProduct)) {
         document.getElementById("edit-phone-container").classList.add("hide");
 
-        fetch(document.getElementById("edit-phone-form").action, {
+        fetch(window.location.origin + `/phones/${id}/edit`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

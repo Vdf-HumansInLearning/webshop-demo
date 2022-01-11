@@ -5,12 +5,14 @@
     <%- include('../partials/_nav'); %>
     <div class="container d-flex justify-content-center flex-column align-items-center m-5 pt-5" id="container">  
     <% if(admin){ %>
+        <%- include('../partials/_breadcrumbs'); %>
         <div class="invalid bg-danger mt-3 d-none" id="invalid-edit">
             <p class="text-white p-2 m-0">An error occured!</p>
         </div>
         <div id="edit-phone-container" class ="edit-phone d-flex justify-content-center flex-column align-items-center text-left">
-            <form class="edit-phone-form" id="edit-phone-form" action="/phones/<%= phone.id %>/edit">
+            <form class="edit-phone-form" id="edit-phone-form">
                 <h3 class="text-center mb-3"><u>Edit product</u></h3>
+                <input type="hidden" value="<%= phone.id %>" id="edit-id"/>
                 <div class="input-group mb-3">
                     <span class="input-group-text" for="edit-brand" id="basic-addon1">Brand*</span>
                     <input id="edit-brand" name="brand" value="<%= phone.brand %>" type="text" class="form-control" placeholder="ex. : Samsung" aria-label="ex. : Samsung" aria-describedby="basic-addon1" required>

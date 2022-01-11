@@ -115,7 +115,7 @@ router.delete('/:id', function (req, res) {
 // update
 router.put("/:id", function (req, res, next) {
   let products = JSON.parse(fs.readFileSync('./data/phones.json', 'utf8'));
-  let phone = content.find(phone => phone.id == req.params.id);
+  let phone = products.find(phone => phone.id == req.params.id);
   console.log(req.params.id);
   if (phone) {
     phone.name = req.body.name;
@@ -127,7 +127,7 @@ router.put("/:id", function (req, res, next) {
     phone.availability_date = req.body.availability_date;
     phone.rating = Number(req.body.rating);
     phone.image = req.body.image;
-
+    console.log(phone)
 
     if (validateProduct(phone)) {
       fs.writeFile('./data/phones.json', JSON.stringify(products), function (err) {
@@ -150,13 +150,13 @@ router.put("/:id", function (req, res, next) {
 function validateProduct(product) {
   let regexProductName = /(^[A-Za-z0-9]{1,16})([ ]{0,1})([A-Za-z0-9]{1,16})?([ ]{0,1})?([A-Za-z0-9]{1,16})/
   let regexLetters = /^[a-zA-Z]+$/;
-  return req.body.name &&
-    req.body.brand &&
-    req.body.operating_system &&
-    req.body.price &&
-    req.body.quantity &&
-    req.body.availability_date &&
-    req.body.image &&
+  return product.name &&
+    product.brand &&
+    product.operating_system &&
+    product.price &&
+    product.quantity &&
+    product.availability_date &&
+    product.image &&
     product.name.match(regexProductName) &&
     product.name.length >= 1 &&
     product.name.length <= 30 &&

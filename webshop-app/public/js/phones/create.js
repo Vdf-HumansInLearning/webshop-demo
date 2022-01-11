@@ -10,7 +10,7 @@ if (document.querySelector("#navbar .nav-item .active")) {
 document.getElementById("phones-link").classList = "nav-link active";
 
 //action for ADD new phone
-if (document.getElementById("display-add-form")) {
+
     var myModal = new bootstrap.Modal(document.getElementById("phone-added"), {});
 
     document.querySelectorAll("#new-phone-form .input-group .form-control").forEach(item => {
@@ -160,8 +160,8 @@ if (document.getElementById("display-add-form")) {
         };
         if (validateProduct(newProduct)) {
 
-            fetch(document.getElementById("new-phone-form").action, {
-                method: 'post',
+            fetch(window.location.origin + "/phones/add", {
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -182,7 +182,7 @@ if (document.getElementById("display-add-form")) {
 
 
     });
-}
+
 
 
 // FUNCTIONS

@@ -12,12 +12,12 @@ let billingZipcode = "";
 
 if (cartItems && cartItems.length > 0) {
   document.getElementById("cart-items").textContent = cartItems.length;
-  let orderTitleDiv = document.createElement('div');
-  orderTitleDiv.setAttribute('class', 'section-title');
-  let sectionNumber = document.createElement('span');
-  sectionNumber.setAttribute('class', 'section-number');
+  let orderTitleDiv = document.createElement("div");
+  orderTitleDiv.setAttribute("class", "section-title");
+  let sectionNumber = document.createElement("span");
+  sectionNumber.setAttribute("class", "section-number");
   sectionNumber.textContent = "1";
-  let orderTitleH3 = document.createElement('h3');
+  let orderTitleH3 = document.createElement("h3");
   orderTitleH3.textContent = "Order Summary";
   orderTitleDiv.appendChild(sectionNumber);
   orderTitleDiv.appendChild(orderTitleH3);
@@ -80,8 +80,7 @@ if (cartItems && cartItems.length > 0) {
       `${cartItems[i].quantity} x ${cartItems[i].price} = ` +
       Number(cartItems[i].price) * cartItems[i].quantity +
       " RON";
-    totalPrice +=
-      Number(cartItems[i].price) * cartItems[i].quantity;
+    totalPrice += Number(cartItems[i].price) * cartItems[i].quantity;
     priceDiv.appendChild(priceTitle);
     priceDiv.appendChild(price);
 
@@ -119,13 +118,20 @@ if (cartItems && cartItems.length > 0) {
   totalDiv.appendChild(totalPriceH4);
   orderDiv.appendChild(totalDiv);
 
-  if (document.getElementById("delivery-address") && document.getElementById("billing-address")) {
-    deliveryFormControls = document.getElementById("delivery-address").querySelectorAll(".form-control");
+  if (
+    document.getElementById("delivery-address") &&
+    document.getElementById("billing-address")
+  ) {
+    deliveryFormControls = document
+      .getElementById("delivery-address")
+      .querySelectorAll(".form-control");
     deliveryStreet = deliveryFormControls[0].value;
     deliveryCity = deliveryFormControls[1].value;
     deliverySuite = deliveryFormControls[2].value;
     deliveryZipcode = deliveryFormControls[3].value;
-    billingFormControls = document.getElementById("billing-address").querySelectorAll(".form-control");
+    billingFormControls = document
+      .getElementById("billing-address")
+      .querySelectorAll(".form-control");
     billingStreet = billingFormControls[0].value;
     billingCity = billingFormControls[1].value;
     billingSuite = billingFormControls[2].value;
@@ -162,8 +168,6 @@ if (cartItems && cartItems.length > 0) {
     }
   }
 
-
-
   let orderBtnDiv = document.createElement("div");
   orderBtnDiv.setAttribute("class", "d-flex justify-content-end mt-3");
   let orderBtn = document.createElement("button");
@@ -189,7 +193,6 @@ if (cartItems && cartItems.length > 0) {
     orderBtnDiv.appendChild(orderBtn);
     document.getElementById("billing-address").appendChild(orderBtnDiv);
   }
-
 
   let modalDiv = document.createElement("div");
   modalDiv.setAttribute("class", "modal");
@@ -242,7 +245,10 @@ if (cartItems && cartItems.length > 0) {
   const plusBtns = document.querySelectorAll(".plus-btn");
   minusBtns.forEach((item) => {
     item.addEventListener("click", () => {
-      console.log(item.parentElement.parentElement.parentElement.parentElement.firstChild.textContent);
+      console.log(
+        item.parentElement.parentElement.parentElement.parentElement.firstChild
+          .textContent
+      );
       console.log(item.parentElement.nextSibling.textContent);
       if (Number(item.parentElement.nextSibling.textContent) > 0) {
         item.parentElement.nextSibling.textContent =
@@ -251,15 +257,15 @@ if (cartItems && cartItems.length > 0) {
         for (let i = 0; i < cartItems.length; i++) {
           if (
             cartItems[i].name ===
-            item.parentElement.parentElement.parentElement.parentElement.firstChild.textContent
+            item.parentElement.parentElement.parentElement.parentElement
+              .firstChild.textContent
           ) {
             console.log(cartItems[i].quantity);
             cartItems[i].quantity -= 1;
             console.log(cartItems[i].quantity);
             item.parentElement.parentElement.parentElement.nextSibling.lastChild.textContent =
               `${cartItems[i].quantity} x ${cartItems[i].price} = ` +
-              Number(cartItems[i].price) *
-              cartItems[i].quantity +
+              Number(cartItems[i].price) * cartItems[i].quantity +
               " RON";
             if (cartItems[i].quantity < 5) {
               item.parentElement.nextSibling.nextSibling.firstChild.disabled = false;
@@ -277,9 +283,7 @@ if (cartItems && cartItems.length > 0) {
               cartItems.length;
           } else {
             localStorage.setItem("items", JSON.stringify(cartItems));
-            total +=
-              Number(cartItems[i].price) *
-              cartItems[i].quantity;
+            total += Number(cartItems[i].price) * cartItems[i].quantity;
           }
         }
         if (cartItems.length > 0) {
@@ -298,13 +302,13 @@ if (cartItems && cartItems.length > 0) {
       for (let i = 0; i < cartItems.length; i++) {
         if (
           cartItems[i].name ===
-          item.parentElement.parentElement.parentElement.parentElement.firstChild.textContent
+          item.parentElement.parentElement.parentElement.parentElement
+            .firstChild.textContent
         ) {
           cartItems[i].quantity += 1;
           item.parentElement.parentElement.parentElement.nextSibling.lastChild.textContent =
             `${cartItems[i].quantity} x ${cartItems[i].price} = ` +
-            Number(cartItems[i].price) *
-            cartItems[i].quantity +
+            Number(cartItems[i].price) * cartItems[i].quantity +
             " RON";
           if (cartItems[i].quantity > 4) {
             item.disabled = true;
@@ -314,8 +318,7 @@ if (cartItems && cartItems.length > 0) {
           }
         }
         localStorage.setItem("items", JSON.stringify(cartItems));
-        total +=
-          Number(cartItems[i].price) * cartItems[i].quantity;
+        total += Number(cartItems[i].price) * cartItems[i].quantity;
       }
       totalPriceH4.textContent = total + " RON";
     });
@@ -335,7 +338,9 @@ if (cartItems && cartItems.length > 0) {
           modal.hide();
           let total = 0;
           for (let i = 0; i < cartItems.length; i++) {
-            console.log(item.parentElement.parentElement.firstChild.textContent);
+            console.log(
+              item.parentElement.parentElement.firstChild.textContent
+            );
             if (
               cartItems[i].name ===
               item.parentElement.parentElement.firstChild.textContent
@@ -347,9 +352,7 @@ if (cartItems && cartItems.length > 0) {
               document.getElementById("cart-items").textContent =
                 cartItems.length;
             } else {
-              total +=
-                Number(cartItems[i].price) *
-                cartItems[i].quantity;
+              total += Number(cartItems[i].price) * cartItems[i].quantity;
             }
           }
           if (cartItems.length > 0) {
@@ -396,20 +399,16 @@ if (cartItems && cartItems.length > 0) {
     }).then((data) => {
       if (data.status === 200) {
         localStorage.removeItem("items");
-        var myModal = new bootstrap.Modal(
-          document.getElementById("order-success"),
-          {}
-        );
+        let myModalEl = document.getElementById("order-success");
+        let myModal = new bootstrap.Modal(myModalEl,{});
+        myModalEl.addEventListener("hide.bs.modal", () => window.location = window.location.origin + "/phones");
         myModal.show();
       } else {
         document.getElementById("invalid-order").classList.remove("d-none");
       }
     });
   });
-  var myModalEl = document.getElementById("order-success");
-  myModalEl.addEventListener("hide.bs.modal", function (event) {
-    window.location.reload();
-  });
+  
 } else {
   localStorage.removeItem("items");
   let emptyCart = document.createElement("h4");
@@ -423,5 +422,4 @@ if (cartItems && cartItems.length > 0) {
   if (document.cookie) {
     document.getElementById("address-container").style.display = "none";
   }
-
 }
