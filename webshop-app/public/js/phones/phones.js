@@ -4,7 +4,12 @@
 let localStorageItems = localStorage.getItem('items');
 if (localStorageItems) {
     let localStorageObject = JSON.parse(localStorageItems);
-    document.getElementById("cart-items").textContent = localStorageObject.length;
+    let sum = 0;
+    for(let i=0; i<localStorageObject.length; i++){
+        sum += localStorageObject[i].quantity;
+    }
+    
+    document.getElementById("cart-items").textContent = sum;
 }
 
 if (document.querySelector("#navbar .nav-item .active")) {
@@ -128,8 +133,8 @@ addCartBtn.forEach(item => {
             }
             if (count < 1) {
                 parsedObject.push({ name: name, price: price, quantity: 1 });
-                document.getElementById("cart-items").textContent = Number(document.getElementById("cart-items").textContent) + 1;
             }
+            document.getElementById("cart-items").textContent = Number(document.getElementById("cart-items").textContent) + 1;
             localStorage.setItem("items", JSON.stringify(parsedObject));
         } else {
             const items = [{ name: name, price: price, quantity: 1 }];

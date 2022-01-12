@@ -11,7 +11,12 @@ let billingSuite = "";
 let billingZipcode = "";
 
 if (cartItems && cartItems.length > 0) {
-  document.getElementById("cart-items").textContent = cartItems.length;
+  
+  let sum = 0;
+  for(let i=0; i<cartItems.length; i++){
+      sum += cartItems[i].quantity;
+  }
+  document.getElementById("cart-items").textContent = sum;
   let orderTitleDiv = document.createElement("div");
   orderTitleDiv.setAttribute("class", "section-title");
   let sectionNumber = document.createElement("span");
@@ -286,6 +291,7 @@ if (cartItems && cartItems.length > 0) {
             total += Number(cartItems[i].price) * cartItems[i].quantity;
           }
         }
+        document.getElementById("cart-items").textContent = Number(document.getElementById("cart-items").textContent) - 1;
         if (cartItems.length > 0) {
           totalPriceH4.textContent = total + " RON";
         } else {
@@ -321,6 +327,7 @@ if (cartItems && cartItems.length > 0) {
         total += Number(cartItems[i].price) * cartItems[i].quantity;
       }
       totalPriceH4.textContent = total + " RON";
+      document.getElementById("cart-items").textContent = Number(document.getElementById("cart-items").textContent) + 1;
     });
   });
 
@@ -345,12 +352,11 @@ if (cartItems && cartItems.length > 0) {
               cartItems[i].name ===
               item.parentElement.parentElement.firstChild.textContent
             ) {
+              document.getElementById("cart-items").textContent = Number(document.getElementById("cart-items").textContent) - cartItems[i].quantity;
               cartItems.splice(i, 1);
               i = i - 1;
               localStorage.setItem("items", JSON.stringify(cartItems));
               item.parentElement.parentElement.remove();
-              document.getElementById("cart-items").textContent =
-                cartItems.length;
             } else {
               total += Number(cartItems[i].price) * cartItems[i].quantity;
             }

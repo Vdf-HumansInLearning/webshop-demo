@@ -3,7 +3,12 @@ const addCartBtn = document.getElementById("add-to-cart");
 let localStorageItems = localStorage.getItem('items');
 if (localStorageItems) {
     let localStorageObject = JSON.parse(localStorageItems);
-    document.getElementById("cart-items").textContent = localStorageObject.length;
+    let sum = 0;
+    for(let i=0; i<localStorageObject.length; i++){
+        sum += localStorageObject[i].quantity;
+    }
+    
+    document.getElementById("cart-items").textContent = sum;
 }
 
 addCartBtn.addEventListener("click", () => {
@@ -22,8 +27,8 @@ addCartBtn.addEventListener("click", () => {
         }
         if (count < 1) {
             parsedObject.push({ name: name, price: price, quantity: 1 });
-            document.getElementById("cart-items").textContent = Number(document.getElementById("cart-items").textContent) + 1;
         }
+        document.getElementById("cart-items").textContent = Number(document.getElementById("cart-items").textContent) + 1;
         localStorage.setItem("items", JSON.stringify(parsedObject));
 
     } else {
@@ -31,6 +36,9 @@ addCartBtn.addEventListener("click", () => {
         localStorage.setItem("items", JSON.stringify(items));
         document.getElementById("cart-items").textContent = Number(document.getElementById("cart-items").textContent) + 1;
     }
+    let liveToast = document.getElementById("liveToast");
+    let toast = new bootstrap.Toast(liveToast);
+    toast.show();
 
 
 });
