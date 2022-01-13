@@ -183,7 +183,7 @@ document.getElementById("edit-phone-form").addEventListener("submit", function (
             }
         })
         document.getElementById('phone-updated').addEventListener('hide.bs.modal', function (event) {
-            window.location.reload();
+            window.location.href = window.location.origin + "/phones";
         });
     }
 

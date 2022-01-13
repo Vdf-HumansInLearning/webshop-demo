@@ -180,7 +180,7 @@ document.getElementById("phones-link").classList = "nav-link active";
                     }
                 })
             document.getElementById('phone-added').addEventListener('hide.bs.modal', function (event) {
-                window.location.reload();
+                window.location.href = window.location.origin + "/phones";
             });
         }
 
