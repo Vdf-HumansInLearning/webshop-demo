@@ -241,7 +241,7 @@ function getProductsByRating(item, rating) {
 
 // filter by available stock (change stock to zero to see effects)
 function getProductsByStock(item, stock) {
-  if (stock == true) {
+  if (stock === "true") {
     return item.quantity > 0;
   }
   return true;

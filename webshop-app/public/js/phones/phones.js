@@ -41,23 +41,31 @@ form.addEventListener("submit", function (event) {
     form.submit();
 });
 
-document.getElementById("search-input").addEventListener('blur', function () {
-    let url = new URL(location.href);
-    if (document.getElementById("search-input").value !== "") {
-        if (window.location.origin + "/phones" === window.location.href) {
-            window.location.href += "?search=" + document.getElementById("search-input").value;
-        } else {
-            url.searchParams.delete('search');
-            if (window.location.origin + "/phones" === url.href) {
+// Init a timeout variable to be used below
+let timeout = null;
+document.getElementById("search-input").addEventListener('keyup', function () {
+    clearTimeout(timeout);
+
+    // Make a new timeout set to go off in 1000ms (1 second)
+    timeout = setTimeout(function () {
+        let url = new URL(location.href);
+        if (document.getElementById("search-input").value !== "") {
+            if (window.location.origin + "/phones" === window.location.href) {
                 window.location.href += "?search=" + document.getElementById("search-input").value;
             } else {
-                window.location.href += "&search=" + document.getElementById("search-input").value;
+                url.searchParams.delete('search');
+                if (window.location.origin + "/phones" === url.href) {
+                    window.location.href += "?search=" + document.getElementById("search-input").value;
+                } else {
+                    window.location.href += "&search=" + document.getElementById("search-input").value;
+                }
             }
+        } else {
+            url.searchParams.delete('search');
+            window.location.href = url.href;
         }
-    } else {
-        url.searchParams.delete('search');
-        window.location.href = url.href;
-    }
+    }, 1000);
+    
 
 });
 

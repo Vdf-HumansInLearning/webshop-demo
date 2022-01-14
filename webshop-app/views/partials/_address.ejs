@@ -16,55 +16,138 @@
     <% } %>
   </div>
   <div class="col-md-4">
-    <div class="input-group">
-      <span class="input-group-text" id="inputGroupPrepend1">Street</span>
-      <input
-        type="text"
-        class="form-control"
-        id="inputStreet"
-        value="<%= user.address.street %>"
-        aria-describedby="inputGroupPrepend1"
-        required
-      />
-    </div>
+    
+    <% if(title === "Delivery Address"){ %>
+      <div class="input-group">
+        <span class="input-group-text" id="inputGroupPrepend1">Street</span>
+        <input
+          type="text"
+          class="form-control"
+          id="inputStreetDelivery"
+          value="<%= user.address.street %>"
+          aria-describedby="inputGroupPrepend1"
+          required
+        />
+      </div>
+      <div class="invalid-feedback mb-2" id="invalid-delivery-street">
+        Invalid street format.
+      </div>
+    <% } else {%>
+      <div class="input-group">
+        <span class="input-group-text" id="inputGroupPrepend1">Street</span>
+        <input
+          type="text"
+          class="form-control"
+          id="inputStreetBilling"
+          value="<%= user.address.street %>"
+          aria-describedby="inputGroupPrepend1"
+          required
+        />
+      </div>
+      <div class="invalid-feedback mb-2" id="invalid-billing-street">
+        Invalid street format.
+      </div>
+    <% } %>
   </div>
   <div class="col-md-4">
-    <div class="input-group">
-      <span class="input-group-text" id="inputGroupPrepend2">City</span>
-      <input
-        type="text"
-        class="form-control"
-        id="inputCity"
-        value="<%= user.address.city %>"
-        aria-describedby="inputGroupPrepend2"
-        required
-      />
-    </div>
+    <% if(title === "Delivery Address"){ %>
+      <div class="input-group">
+        <span class="input-group-text" id="inputGroupPrepend2">City</span>
+        <input
+          type="text"
+          class="form-control"
+          id="inputCityDelivery"
+          value="<%= user.address.city %>"
+          aria-describedby="inputGroupPrepend2"
+          required
+        />
+      </div>
+      <div class="invalid-feedback mb-2" id="invalid-delivery-city">
+        Invalid city format.
+      </div>
+    <% } else {%>
+      <div class="input-group">
+        <span class="input-group-text" id="inputGroupPrepend2">City</span>
+        <input
+          type="text"
+          class="form-control"
+          id="inputCityBilling"
+          value="<%= user.address.city %>"
+          aria-describedby="inputGroupPrepend2"
+          required
+        />
+      </div>
+      <div class="invalid-feedback mb-2" id="invalid-billing-city">
+        Invalid city format.
+      </div>
+    <% } %>
   </div>
   <div class="col-md-4">
-    <div class="input-group">
-      <span class="input-group-text" id="inputGroupPrepend3">Suite</span>
-      <input
-        type="text"
-        class="form-control"
-        id="inputSuite"
-        value="<%= user.address.suite %>"
-        aria-describedby="inputGroupPrepend3"
-        required
-      />
-    </div>
+    
+    <% if(title === "Delivery Address"){ %>
+      <div class="input-group">
+        <span class="input-group-text" id="inputGroupPrepend3">Suite</span>
+        <input
+          type="text"
+          class="form-control"
+          id="inputSuiteDelivery"
+          value="<%= user.address.suite %>"
+          aria-describedby="inputGroupPrepend3"
+          required
+        />
+      </div>
+      <div class="invalid-feedback mb-2" id="invalid-delivery-suite">
+        Invalid suite format.
+      </div>
+    <% } else {%>
+      <div class="input-group">
+        <span class="input-group-text" id="inputGroupPrepend3">Suite</span>
+        <input
+          type="text"
+          class="form-control"
+          id="inputSuiteBilling"
+          value="<%= user.address.suite %>"
+          aria-describedby="inputGroupPrepend3"
+          required
+        />
+      </div>
+      <div class="invalid-feedback mb-2" id="invalid-billing-suite">
+        Invalid suite format.
+      </div>
+    <% } %>
   </div>
   <div class="col-md-3">
-    <div class="input-group">
-      <span class="input-group-text" id="inputGroupPrepend4">Zip</span>
-      <input
-        type="text"
-        class="form-control"
-        id="inputZip"
-        value="<%= user.address.zipcode %>"
-        aria-describedby="inputGroupPrepend4"
-        required
-      />
-    </div>
+    
+    <% if(title === "Delivery Address"){ %>
+      <div class="input-group">
+        <span class="input-group-text" id="inputGroupPrepend4">Zip</span>
+        <input
+          type="text"
+          class="form-control"
+          id="inputZipDelivery"
+          value="<%= user.address.zipcode %>"
+          aria-describedby="inputGroupPrepend4"
+          required
+        />
+      </div>
+      <div class="invalid-feedback mb-2" id="invalid-delivery-zip">
+        Invalid zip code format.
+      </div>
+    <% } else {%>
+      <div class="input-group">
+        <span class="input-group-text" id="inputGroupPrepend4">Zip</span>
+        <input
+          type="text"
+          class="form-control"
+          id="inputZipBilling"
+          value="<%= user.address.zipcode %>"
+          aria-describedby="inputGroupPrepend4"
+          required
+        />
+      </div>
+      <div class="invalid-feedback mb-2" id="invalid-billing-zip">
+        Invalid zip code format.
+      </div>
+    <% } %>
   </div>
 </div>

@@ -33,10 +33,7 @@ router.post("/", function (req, res, next) {
   let users = JSON.parse(fs.readFileSync("./data/users.json", "utf8"));
   let products = JSON.parse(fs.readFileSync("./data/phones.json", "utf8"));
   let user = users.find((user) => user.id == req.body.data.user);
-  // let today = new Date();
-  // let date =
-  //   today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
-  if (user && req.body.data) {
+  if (req.body.data.delivery_address.street && req.body.data.delivery_address.suite && req.body.data.delivery_address.city && req.body.data.delivery_address.zipcode && req.body.data.billing_address.street && req.body.data.billing_address.suite && req.body.data.billing_address.city && req.body.data.billing_address.zipcode && req.body.data.items && req.body.data.total) {
     let order = {
       id: uuid.v1(),
       user_id: user.id,
@@ -61,37 +58,41 @@ router.post("/", function (req, res, next) {
       total: req.body.data.total,
     };
 
-    orders.push(order);
-    for (let i = 0; i < req.body.data.items.length; i++) {
-      let phone = products.find(
-        (item) => `${item.brand} ${item.name}` == req.body.data.items[i].name
-      );
+    if (validateOrder(order)) {
+      orders.push(order);
+      for (let i = 0; i < req.body.data.items.length; i++) {
+        let phone = products.find(
+          (item) => `${item.brand} ${item.name}` == req.body.data.items[i].name
+        );
 
-      if (phone) {
-        if (phone.quantity > 1) {
-          phone.quantity = phone.quantity - req.body.data.items[i].quantity;
-        } else {
-          phone.quantity = 0;
+        if (phone) {
+          if (phone.quantity > 1) {
+            phone.quantity = phone.quantity - req.body.data.items[i].quantity;
+          } else {
+            phone.quantity = 0;
+          }
         }
       }
-    }
-    fs.writeFile("./data/orders.json", JSON.stringify(orders), function (err) {
-      if (err) {
-        throw err;
-      } else {
-        fs.writeFile(
-          "./data/phones.json",
-          JSON.stringify(products),
-          function (err) {
-            if (err) {
-              throw err;
-            } else {
-              res.status(200).send({ message: "Successfully registered" });
+      fs.writeFile("./data/orders.json", JSON.stringify(orders), function (err) {
+        if (err) {
+          throw err;
+        } else {
+          fs.writeFile(
+            "./data/phones.json",
+            JSON.stringify(products),
+            function (err) {
+              if (err) {
+                throw err;
+              } else {
+                res.status(200).send({ message: "Successfully registered" });
+              }
             }
-          }
-        );
-      }
-    });
+          );
+        }
+      });
+    } else {
+      res.status(400).send({ message: "Bad request" });
+    }
   } else {
     res.status(400).send({ message: "Please complete all fields" });
   }
@@ -115,5 +116,36 @@ router.delete("/:id", function (req, res) {
     );
   }
 });
+
+
+function validateOrder(order) {
+  let regexLetters = /(^[A-Za-z]{2,30})/;
+  let regexZipCode = /^[0-9]{6}$/;
+  let regexAddressSuite = /^[.0-9a-zA-Z\s,-]+$/;
+
+  return order.delivery_address.street &&
+    order.delivery_address.suite &&
+    order.delivery_address.city &&
+    order.delivery_address.zipcode &&
+    order.billing_address.street &&
+    order.billing_address.suite &&
+    order.billing_address.city &&
+    order.billing_address.zipcode &&
+    order.order &&
+    order.delivery_address.street.length >= 1 &&
+    order.delivery_address.street.length <= 30 &&
+    order.billing_address.street.length >= 1 &&
+    order.billing_address.street.length <= 30 &&
+    order.delivery_address.city.match(regexLetters) &&
+    order.delivery_address.city.length >= 1 &&
+    order.delivery_address.city.length <= 30 &&
+    order.billing_address.city.match(regexLetters) &&
+    order.billing_address.city.length >= 1 &&
+    order.billing_address.city.length <= 30 &&
+    order.delivery_address.suite.match(regexAddressSuite) &&
+    order.billing_address.suite.match(regexAddressSuite) &&
+    order.delivery_address.zipcode.match(regexZipCode) &&
+    order.billing_address.zipcode.match(regexZipCode);
+}
 
 module.exports = router;

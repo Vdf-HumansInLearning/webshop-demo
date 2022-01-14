@@ -190,13 +190,14 @@ if (cartItems && cartItems.length > 0) {
     orderBtnDiv.setAttribute("data-bs-toggle", "tooltip");
     orderBtnDiv.setAttribute("data-bs-placement", "bottom");
     orderBtnDiv.setAttribute("title", "You need to log in before ordering");
+    document.getElementById("address-form").appendChild(orderBtnDiv);
   } else {
     let containerHeight = document.getElementById("container");
     containerHeight.style.minHeight = "0vh";
-
+    orderBtn.setAttribute("type","submit");
     orderBtn.textContent = "Place Order";
     orderBtnDiv.appendChild(orderBtn);
-    document.getElementById("billing-address").appendChild(orderBtnDiv);
+    document.getElementById("address-form").appendChild(orderBtnDiv);
   }
 
   let modalDiv = document.createElement("div");
@@ -380,39 +381,95 @@ if (cartItems && cartItems.length > 0) {
       document.getElementById("order-total").lastChild.textContent.slice(0, -4)
     );
 
-    fetch(window.location.origin + "/orders", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        items: cartItems,
-        total: orderTotal,
-        user: cookieValue,
-        delivery_address: {
-          street: deliveryFormControls[0].value,
-          city: deliveryFormControls[1].value,
-          suite: deliveryFormControls[2].value,
-          zipcode: deliveryFormControls[3].value,
+    if(validateAddress()){
+      fetch(window.location.origin + "/orders", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
         },
-        billing_address: {
-          street: billingFormControls[0].value,
-          city: billingFormControls[1].value,
-          suite: billingFormControls[2].value,
-          zipcode: billingFormControls[3].value,
-        },
-      }),
-    }).then((data) => {
-      if (data.status === 200) {
-        localStorage.removeItem("items");
-        let myModalEl = document.getElementById("order-success");
-        let myModal = new bootstrap.Modal(myModalEl,{});
-        myModalEl.addEventListener("hide.bs.modal", () => window.location.reload());
-        setTimeout(() => { myModal.show() }, 2000);
+        body: JSON.stringify({
+          items: cartItems,
+          total: orderTotal,
+          user: cookieValue,
+          delivery_address: {
+            street: deliveryFormControls[0].value,
+            city: deliveryFormControls[1].value,
+            suite: deliveryFormControls[2].value,
+            zipcode: deliveryFormControls[3].value,
+          },
+          billing_address: {
+            street: billingFormControls[0].value,
+            city: billingFormControls[1].value,
+            suite: billingFormControls[2].value,
+            zipcode: billingFormControls[3].value,
+          },
+        }),
+      }).then((data) => {
+        if (data.status === 200) {
+          localStorage.removeItem("items");
+          let myModalEl = document.getElementById("order-success");
+          let myModal = new bootstrap.Modal(myModalEl,{});
+          myModalEl.addEventListener("hide.bs.modal", () => window.location.reload());
+          setTimeout(() => { myModal.show() }, 2000);
+        } else {
+          document.getElementById("invalid-order").classList.remove("d-none");
+        }
+      });
+    } else {
+      let regexLetters = /(^[A-Za-z]{2,30})/;
+      let regexZipCode = /^[0-9]{6}$/;
+      let regexAddressSuite = /^[.0-9a-zA-Z\s,-]+$/;
+      let inputDeliveryStreet = document.getElementById("inputStreetDelivery").value;
+      let inputDeliveryCity = document.getElementById("inputCityDelivery").value;
+      let inputDeliverySuite = document.getElementById("inputSuiteDelivery").value;
+      let inputDeliveryZip = document.getElementById("inputZipDelivery").value;
+      let inputBillingStreet = document.getElementById("inputStreetBilling").value;
+      let inputBillingCity = document.getElementById("inputCityBilling").value;
+      let inputBillingSuite = document.getElementById("inputSuiteBilling").value;
+      let inputBillingZip = document.getElementById("inputZipBilling").value;
+
+      if(inputDeliveryStreet && inputDeliveryStreet.length >= 1 && inputDeliveryStreet.length <= 30){
+        document.getElementById("invalid-delivery-street").style.display = "none";
       } else {
-        document.getElementById("invalid-order").classList.remove("d-none");
+        document.getElementById("invalid-delivery-street").style.display = "block";
       }
-    });
+      if(inputDeliverySuite && inputDeliverySuite.match(regexAddressSuite)) {
+        document.getElementById("invalid-delivery-suite").style.display = "none";
+      } else {
+        document.getElementById("invalid-delivery-suite").style.display = "block";
+      }
+      if(inputDeliveryCity && inputDeliveryCity.match(regexLetters) && inputDeliveryCity.length >= 1 && inputDeliveryCity.length <= 30) {
+        document.getElementById("invalid-delivery-city").style.display = "none";
+      } else {
+        document.getElementById("invalid-delivery-city").style.display = "block";
+      }
+      if(inputDeliveryZip && inputDeliveryZip.match(regexZipCode) ) {
+        document.getElementById("invalid-delivery-zip").style.display = "none";
+      } else {
+        document.getElementById("invalid-delivery-zip").style.display = "block";
+      }
+      if(inputBillingStreet && inputBillingStreet.length >= 1 && inputBillingStreet.length <= 30){
+        document.getElementById("invalid-billing-street").style.display = "none";
+      } else {
+        document.getElementById("invalid-billing-street").style.display = "block";
+      }
+      if(inputBillingSuite && inputBillingSuite.match(regexAddressSuite)) {
+        document.getElementById("invalid-billing-suite").style.display = "none";
+      } else {
+        document.getElementById("invalid-billing-suite").style.display = "block";
+      }
+      if(inputBillingCity && inputBillingCity.match(regexLetters) && inputBillingCity.length >= 1 && inputBillingCity.length <= 30) {
+        document.getElementById("invalid-billing-city").style.display = "none";
+      } else {
+        document.getElementById("invalid-billing-city").style.display = "block";
+      }
+      if(inputBillingZip && inputBillingZip.match(regexZipCode) ) {
+        document.getElementById("invalid-billing-zip").style.display = "none";
+      } else {
+        document.getElementById("invalid-billing-zip").style.display = "block";
+      }
+    
+    }
   });
   
 } else {
@@ -428,4 +485,41 @@ if (cartItems && cartItems.length > 0) {
   if (document.cookie) {
     document.getElementById("address-container").style.display = "none";
   }
+}
+
+function validateAddress() {
+  let regexLetters = /(^[A-Za-z]{2,30})/;
+  let regexZipCode = /^[0-9]{6}$/;
+  let regexAddressSuite = /^[.0-9a-zA-Z\s,-]+$/;
+  let inputDeliveryStreet = document.getElementById("inputStreetDelivery").value;
+  let inputDeliveryCity = document.getElementById("inputCityDelivery").value;
+  let inputDeliverySuite = document.getElementById("inputSuiteDelivery").value;
+  let inputDeliveryZip = document.getElementById("inputZipDelivery").value;
+  let inputBillingStreet = document.getElementById("inputStreetBilling").value;
+  let inputBillingCity = document.getElementById("inputCityBilling").value;
+  let inputBillingSuite = document.getElementById("inputSuiteBilling").value;
+  let inputBillingZip = document.getElementById("inputZipBilling").value;
+
+  return inputDeliveryStreet &&
+    inputDeliverySuite &&
+    inputDeliveryCity &&
+    inputDeliveryZip &&
+    inputBillingStreet &&
+    inputBillingSuite &&
+    inputBillingCity &&
+    inputBillingZip &&
+    inputDeliveryStreet.length >= 1 &&
+    inputDeliveryStreet.length <= 30 &&
+    inputBillingStreet.length >= 1 &&
+    inputBillingStreet.length <= 30 &&
+    inputDeliveryCity.match(regexLetters) &&
+    inputDeliveryCity.length >= 1 &&
+    inputDeliveryCity.length <= 30 &&
+    inputBillingCity.match(regexLetters) &&
+    inputBillingCity.length >= 1 &&
+    inputBillingCity.length <= 30 &&
+    inputDeliverySuite.match(regexAddressSuite) &&
+    inputBillingSuite.match(regexAddressSuite) &&
+    inputDeliveryZip.match(regexZipCode) &&
+    inputBillingZip.match(regexZipCode);
 }
