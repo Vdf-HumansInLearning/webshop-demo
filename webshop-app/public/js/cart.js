@@ -190,7 +190,6 @@ if (cartItems && cartItems.length > 0) {
     orderBtnDiv.setAttribute("data-bs-toggle", "tooltip");
     orderBtnDiv.setAttribute("data-bs-placement", "bottom");
     orderBtnDiv.setAttribute("title", "You need to log in before ordering");
-    document.getElementById("address-form").appendChild(orderBtnDiv);
   } else {
     let containerHeight = document.getElementById("container");
     containerHeight.style.minHeight = "0vh";
